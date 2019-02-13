@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ content.header }}</h1>
+<form class="form" action="testapp_method" id="form1" method="post">
+	{% csrf_token %}
+	{{ content.lable1 }}<br>
+	<input type="text" id="data_field">
+	<button class="btn btn-lg btn-outline-success btn-success" type="submit" id="btn_submit">{{ content.btn_text }}</button>
+</form>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}

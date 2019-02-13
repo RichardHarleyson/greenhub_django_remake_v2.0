@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>
+		{% block title %}
+			GreenHub - Карта зарядных станций
+		{% endblock %}
+	</title>
+	<meta name="description" content="GreenHub — электромобили в широком ассортименте. Ford Focus, Nissan Leaf, Tesla Model S, Fiat 500, все доступные модели в австосалоне электромобилей GreenHub в городе Днепр!">
+{% endblock %}
+
+{% block content %}
+<!--    Charger Map-->
+    <div class="container-fluid wh-100">
+        <div class="container">
+            <h2>Карта зарядных станций<br><small>По всей Украине</small></h2>
+            <iframe style="height:700px; width: 100%" src="https://www.plugshare.com/widget.html?latitude=48.3794&amp;longitude=31.1656&amp;spanLat=5&amp;spanLng=5"></iframe>
+        </div>
+    </div>
+<!--    Charget Map END-->
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,355 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>
+		{% block title %}
+			GreenHub - Автосалон электромобилей
+		{% endblock %}
+	</title>
+	<meta name="description" content="GreenHub — электромобили в широком ассортименте. Ford Focus, Nissan Leaf, Tesla Model S, Fiat 500, все доступные модели в австосалоне электромобилей GreenHub в городе Днепр!">
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block content %}
+<!--Head Slider-->
+<div class="carousel slide" data-ride="carousel">
+	<div class="carousel-inner d-none d-md-block">
+		<div class="carousel-item active">
+				<img class="responsive" src="{% static "img/nissa_head_block.jpg"%}" alt="Slide1" />
+		</div>
+		<div class="carousel-item">
+				<img class="responsive" src="{% static "img/tesla_head1.jpg"%}" alt="Slide2" />
+		</div>
+	</div>
+</div>
+<!--Head Slider END-->
+
+<div class="container text-center" style="margin-top: 30px; margin-bottom: 20px">
+		<h1 class="d-none d-md-block">Автосалон Электромобилей GreenHub</h1>
+		<h2 class="d-sm-block d-md-none">Автосалон Электромобилей GreenHub</h2>
+</div>
+
+<!--mobile head-->
+<div class="inside_bar d-block d-sm-none special-font">
+		<h4>Заезжай, подберём тебе<br>что нибудь крутое!</h4>
+		<hr>
+		<div class="rows">
+				<i class="fas fa-mobile-alt i-big g-color--primary"></i>
+				<p><span>+38 (073) 039-4449 <br> +38 (067) 561-1161</span></p>
+		</div>
+		<div class="rows">
+				<i class="far fa-map i-big g-color--primary"></i>
+				<p><span>г.Днепр, пл.Десантников, 1</span></p>
+		</div>
+		<div class="rows">
+				<i class="far fa-clock i-big g-color--primary"></i>
+				<p><span>Пн-Сб: 10:00-18:00<br>Вс: Вых</span></p>
+		</div>
+		<div class="row" style="margin:10px;">
+				<a class="btn-block">
+						<button class="btn btn-lg btn-outline-success btn-color-scheme btn-block" type="button" data-toggle="modal" data-target="#testdrivemodal">Запись на тест-драйв</button>
+				</a>
+		</div>
+		<div class="row" style="margin:10px;">
+				<a class="btn-block" href="https://greenhub.pro/vehicles">
+						<button class="btn btn-lg btn-outline-success btn-color-scheme btn-block" type="button">Авто в наличии</button>
+				</a>
+		</div>
+		<div class="row" style="margin:10px;">
+				<a class="btn-block">
+						<button class="btn btn-lg btn-outline-success btn-color-scheme btn-block" type="button" data-toggle="modal" data-target="#callmemodal">Консультации</button>
+				</a>
+		</div>
+</div>
+<!--mobile head END-->
+
+<!--Choose Your Vehicle-->
+<!--<div class="move_through d-none d-md-block"></div>-->
+<div class="container special-font">
+		<div class="headers">
+				<h2>Выбери свой электромобиль</h2>
+		</div>
+		<div class="row">
+				<div class="col-sm" style="margin:10px">
+						<div class="card h-100" style="border: 1px solid black;">
+								<a href="#"><img class="card-img-top" src="{% static "img/Nissan_leaf.png"%}" alt="Nissan Leaf small photo"></a>
+								<div class="card-body">
+										<h4 class="card-title" style="text-align: center">
+												<a href="/vehicles">Nissan Leaf</a>
+										</h4>
+										<h5 style="text-align: right">от $10 000</h5>
+										<p class="card-text">
+												<b>Батарея: </b>24/30кВт<br>
+												<b>Мощность: </b>80кВт<br>
+												<b>Запас хода: </b>до 180км<br>
+												<b>Полная зарядка: </b>7-8ч
+										</p>
+								</div>
+						</div>
+				</div>
+				<div class="col-sm" style="margin:10px">
+						<div class="card h-100" style="border: 1px solid black">
+								<a href="#"><img class="card-img-top" src="{% static "img/Tesla_new.png"%}" alt="Tesla small photo"></a>
+								<div class="card-body">
+										<h4 class="card-title" style="text-align: center">
+												<a href="/vehicles">Tesla Model S</a>
+										</h4>
+										<h5 style="text-align: right">от $35 000</h5>
+										<p class="card-text">
+												<b>Батарея: </b>85кВт<br>
+												<b>Мощность: </b>80кВт<br>
+												<b>Запас хода: </b>до 400 км<br>
+												<b>Полная зарядка: </b>20-30ч
+										</p>
+								</div>
+						</div>
+				</div>
+				<div class="col-sm" style="margin:10px">
+						<div class="card h-100" style="border: 1px solid black">
+								<a href="#"><img class="card-img-top" src="{% static "img/FORD_FOCUS.png"%}" alt="Ford focus small photo"></a>
+								<div class="card-body">
+										<h4 class="card-title" style="text-align: center">
+												<a href="/vehicles">Ford Focus</a>
+										</h4>
+										<h5 style="text-align: right">от $12 000</h5>
+										<p class="card-text">
+												<b>Батарея: </b>23кВт<br>
+												<b>Мощность: </b>107кВт<br>
+												<b>Запас хода: </b>до 160 км<br>
+												<b>Полная зарядка: </b>7-8ч
+										</p>
+								</div>
+						</div>
+				</div>
+		</div>
+		<div style="text-align: center; margin: 50px 30px 50px 30px">
+				<a href="/vehicles">
+						<button class="btn btn-lg btn-outline-success btn-color-scheme" style="width: 300px">Авто в наличии</button>
+				</a>
+		</div>
+</div>
+<!--Choose Your Vehicle END-->
+
+<hr style="width: 500px">
+
+<!--Leaf Veh-->
+<div class="row">
+		<div class="col-md-7">
+				<a>
+						<img class="responsive" src="{% static "img/leaf_on_move1.jpg"%}">
+				</a>
+		</div>
+		<div class="col-md-4" style="margin: 10px">
+				<div class="inside-text-leaf special-font">
+						<div class="text-right d-block d-md-none">
+								<h2>Nissan Leaf</h2>
+								<h3>Превосходная эффективность и весомая экономия</h3>
+						</div>
+						<div class="d-none d-md-block">
+								<h2>Nissan Leaf</h2>
+								<h3>Превосходная эффективность и весомая экономия</h3>
+						</div>
+						<hr style="width:50px">
+						<div class="row">
+								<div class="col col-sm">
+										<i class="fas fa-battery-full i-big g-color--primary g-color--primary"></i>
+										<p><span>Батарея: 24/30кВТ</span></p>
+								</div>
+								<div class="col col-sm">
+										<i class="fas fa-road i-big g-color--primary"></i>
+										<p><span>Запас хода: до 210км</span></p>
+								</div>
+								<div class="col col-sm">
+										<i class="fas fa-battery-quarter i-big g-color--primary"></i>
+										<p><span>Зарядка: <br>7-8ч</span></p>
+								</div>
+								<div class="col col-sm">
+										<i class="fas fa-coins i-big g-color--primary"></i>
+										<p><span>Цена хода: 0,3 грн/км</span></p>
+								</div>
+						</div>
+						<p><span class="g-font-size-18--lg">Лидер продаж.</span>
+								<span><br><br>С полностью заряженной батареей Nissan Leaf может проехать до 180 км на одном заряде, а технология глубокой рекупирации позволит еще эффективнее экономить заряд батареи. Этот электромобиль наиболее явно показывает все преимущества электричества перед бензином.
+						</span></p>
+										<div class="btn-group d-flex">
+												<a class="w-100" href="/vehicles">
+														<button class="btn btn-lg btn-outline-success btn-color-scheme w-100">Авто в наличии</button>
+												</a>
+												<a class="w-100">
+														<button class="btn btn-lg btn-outline-success btn-color-scheme w-100"  data-toggle="modal" data-target="#testdrivemodal">Тест-драйв</button>
+												</a>
+										</div>
+				</div>
+		</div>
+</div>
+<!--Leaf Veh END-->
+
+<div class="divider-divs"></div>
+
+<!--Tesla Veh-->
+<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-4" style="margin-top: 20px">
+				<div class="inside-text-tesla special-font">
+						<h2>Tesla Model S</h2>
+						<h3>Жгите резину, а не бензин</h3>
+						<hr style="width:50px">
+						<div class="row">
+								<div class="col col-sm">
+										<i class="fas fa-battery-full i-big g-color--primary"></i>
+										<p><span>Батарея: 85кВт</span></p>
+								</div>
+								<div class="col col-sm">
+										<i class="fas fa-road i-big g-color--primary"></i>
+										<p><span>Запас хода: до 400км</span></p>
+								</div>
+								<div class="col col-sm">
+										<i class="fas fa-battery-quarter i-big g-color--primary"></i>
+										<p><span>Зарядка: <br>20-30ч</span></p>
+								</div>
+								<div class="col col-sm">
+										<i class="fas fa-coins i-big g-color--primary"></i>
+										<p><span>Цена хода: 0,2 грн/км</span></p>
+								</div>
+						</div>
+						<p><span class="g-font-size-18--lg">Легендарное авто, прямо из США</span>
+								<span><br><br>Электромобиль достойный звания легенды. Качество, эффективность и стиль - краткое описание данного электромобиля. В Днепре таких авто меньше двух десятков - пополните ряды владельцев легенды!
+						</span></p>
+								<div class="btn-group d-flex">
+										<a class="w-100" href="/vehicles">
+												<button class="btn btn-lg btn-outline-success btn-color-scheme w-100">Авто в наличии</button>
+										</a>
+										<a class="w-100">
+												<button class="btn btn-lg btn-outline-success btn-color-scheme w-100"  data-toggle="modal" data-target="#testdrivemodal">Тест-драйв</button>
+										</a>
+								</div>
+				</div>
+		</div>
+		<div class="col-md-7">
+				<a>
+						<img class="responsive" src="{% static "img/Tesla_on_move1.jpg"%}">
+				</a>
+		</div>
+</div>
+<!--Tesla Veh END-->
+
+<div style="height:60px;"></div>
+
+<!--Text info-->
+<div class="row special-font margin-top-20">
+		<div class="col-md-4">
+				<img class="img-fluid" src="{% static "img/charging.jpg"%}">
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-6 text-center margin-top-20">
+				<div class="row">
+						<div class="col-md-12 margin-top-20">
+										<div class="row">
+												<div class="col-md-4">
+														<p><span class="fas fa-hand-holding-usd g-color--primary i-big"></span></p>
+														<p><span>Экономно</span></p>
+														<p><span>Электроэнергия существенно дешевеле бензина</span></p>
+												</div>
+												<div class="col-md-4">
+														<p><span class="fas fa-wrench g-color--primary i-big"></span></p>
+														<p><span>Надежно</span></p>
+														<p><span>Забудьте о широком ТО, никаких свечей, ремней и т.д.</span></p>
+												</div>
+												<div class="col-md-4">
+														<p><span class="fas fa-check g-color--primary i-big"></span></p>
+														<p><span>Эффективно</span></p>
+														<p><span>Электромобль не уступает по мощности бензиновому</span></p>
+												</div>
+										</div>
+										<div class="row">
+												<div class="col-md-4">
+														<p><span class="fas fa-volume-off g-color--primary i-big"></span></p>
+														<p><span>Бесшумно</span></p>
+														<p><span>Уровень шума от электромобиля - нулевой</span></p>
+												</div>
+												<div class="col-md-4">
+														<p><span class="far fa-thumbs-up g-color--primary i-big"></span></p>
+														<p><span>Удобно</span></p>
+														<p><span>Заряжаться можно где угодно, даже от обычной розетки</span></p>
+												</div>
+												<div class="col-md-4">
+														<p><span class="fas fa-leaf g-color--primary i-big"></span></p>
+														<p><span>Экологично</span></p>
+														<p><span>Электромобиль не производит никаких отходов</span></p>
+												</div>
+										</div>
+						</div>
+				</div>
+		</div>
+		<div class="col-md-1"></div>
+</div>
+<!--Text info END-->
+
+<div style="height:100px;"></div>
+
+<div class="divider-divs"></div>
+
+<!--Contacts-->
+<div class="contacts_main">
+		<div class="bar d-none d-md-block">
+				<div class="inside_bar">
+						<h4>Заезжай, подберём тебе<br>что нибудь крутое!</h4>
+						<hr>
+						<div class="rows">
+								<i class="fas fa-mobile-alt i-big g-color--primary"></i>
+								<p><span>+38 (073) 039-4449 <br> +38 (067) 561-1161</span></p>
+						</div>
+						<div class="rows">
+								<i class="far fa-map i-big g-color--primary"></i>
+								<p><span>Днепр, пл.Десантников, 1</span></p>
+						</div>
+						<div class="rows">
+								<i class="far fa-clock i-big g-color--primary"></i>
+								<p><span>Пн-Сб: 10:00-18:00<br>Вс: Вых</span></p>
+						</div>
+				</div>
+		</div>
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2644.7659461994735!2d35.02814806677976!3d48.48020288767991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dbe25f67bcd67d%3A0x9953651bc550481!2z0L_Quy4g0JTQtdGB0LDQvdGC0L3QuNC60L7QsiwgMSwg0JTQvdC40L_RgNC-LCDQlNC90LXQv9GA0L7Qv9C10YLRgNC-0LLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNDkwMDA!5e0!3m2!1sru!2sua!4v1523699405424" width="100%" height="700px" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+<!--Contacts END-->
+
+
+<!-- FA Questions Text -->
+<div class="g-container--md g-padding-y-50--xs g-padding-y-70--sm">
+		<h2 class="g-font-size-32--xs g-font-size-36--md g-text-center--xs g-margin-b-80--xs">Почему именно электромобиль?</h2>
+		<div class="row g-margin-b-30--xs">
+				<div class="col-sm-6 g-margin-b-30--xs g-margin-b-0--sm">
+						<p class="g-font-size-18--xs">Электромобиль имеет преимущества перед традиционными дизельно-бензиновыми «собратьями»: он безопасен, прост в обслуживании, не загрязняет окружающую среду и при этом не уступает в производительности. Для большинства потребителей главный аргумент перехода на электромобиль — экономия.</p>
+						<div class="g-padding-y-40--xs">
+								<p class="g-color--primary g-font-family--playfair g-font-size-20--lg"><i>Электромобиль — это, прежде всего, экономно.</i></p>
+						</div>
+				</div>
+				<div class="col-sm-6">
+						<p class="g-font-size-18--xs">Электромобиль – уже не новинка, но спрос растет, это означает приход на рынок крупных производителей (Nissan, Hyundai, Tesla, Fiat 500), что еще больше снизит цены.</p>
+						<p class="g-font-size-18--xs">В больших городах Украины, в частности в Днепре, есть все необходимые условия для электромобилей: открыто более 300 зарядных станций. До 2021 года Министерство инфраструктуры планирует освободить импортные электромобили от НДС, пенсионного сбора и акциза что сделает их в разы дешевле, а значит еще более экономически выгодными.</p>
+				</div>
+		</div>
+		<div class="g-text-center--xs">
+				<p class="g-margin-b-2--xs g-font-size-18--xs">1 кВт/ч стоит 0,9 грн при условии потребления до 100 кВт/ч за месяц.<br> Когда расход превысит этот порог, то стоимость 1 кВт/ч составит 1,7 грн.</p>
+		</div>
+</div>
+<!-- End FA Questions Text -->
+
+<hr class="w-25">
+
+<div class="container-fluid special-font" style="font-stretch: expanded;">
+		<div class="row">
+				<div class="col-md-4 text-center font-size-30">
+						GreenHub
+				</div>
+				<div class="col-md-4  text-center">
+						<p><span class="g-font-size-18--xs">GreenHub - электромобили в широком ассортименте в г.Днепр. Мы продаем электрокары марок Ford, Nissan, BMW, Tesla, Fiat. Автосалон GreenHub осуществляет предзаказ электромобилей из США напрямую — вы получаете новые автомобили по доступной цене и забываете про утомительную процедуру заказа, доставки и растаможки, все это мы берем на себя.</span></p>
+						<p><span class="g-font-size-18--xs">Электромобиль — это современное, простое, безопасное и экономически выгодное решение.<br>Переходите на «зеленый свет» с GreenHub!</span></p>
+				</div>
+				<div class="col-md-4">
+						<img src="{% static "img/chargers.jpg"%}" class="img-responsive">
+				</div>
+		</div>
+</div>
+{% endblock %}
