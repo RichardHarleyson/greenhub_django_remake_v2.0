@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 import apps.clients.views as clients_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
 	# Admin
@@ -32,4 +34,4 @@ urlpatterns = [
 	path('testdrive_form', clients_views.testdrive_form, name='testdrive_form'),
 	path('callme_form', clients_views.callme_form, name='callme_form'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

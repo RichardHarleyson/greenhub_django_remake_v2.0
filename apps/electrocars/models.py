@@ -12,7 +12,7 @@ class Vehicle(models.Model):
 	veh_color = models.CharField(max_length=30)
 	veh_price = models.CharField(max_length=10)
 	# veh_photo = models.CharField(max_length=250, blank=True)
-	veh_photo = models.FileField(upload_to='greenhub_remake/static/img/vehicles/%Y/%m/%d/', blank=True)
+	veh_photo = models.FileField(upload_to='vehicles/%Y/%m_%d/', blank=True)
 	# veh_folder = models.CharField(max_length=350, blank=True)
 	veh_battery = models.CharField(max_length=10, blank=True)
 	veh_info = models.CharField(max_length=100, blank=True)

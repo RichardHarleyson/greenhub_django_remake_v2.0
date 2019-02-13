@@ -105,3 +105,6 @@ venv.bak/
 
 #django files
 settings.py
+
+#media files
+.media
