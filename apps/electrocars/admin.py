@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Vehicle
+from .models import Vehicle, Vehicle_photos
+
+
+class VehiclePictureInline(admin.TabularInline):
+	model = Vehicle_photos
+	fields = ['veh_photo']
 
 class MainAmdmin(admin.ModelAdmin):
 	list_display = (
@@ -13,5 +18,6 @@ class MainAmdmin(admin.ModelAdmin):
 		'veh_status',
 		'add_date',
 		)
+	inlines = [VehiclePictureInline,]
 
 admin.site.register(Vehicle, MainAmdmin)
