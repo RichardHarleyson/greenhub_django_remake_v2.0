@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from .models import Gdrive_vehicles
+from apps.electrocars.models import Vehicle, Vehicle_photos
 # Googledrive modules
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -32,28 +33,29 @@ def grab_vehs(request):
 	sheet1 = client.open_by_key('1nzwOMZIHoHFhU-VneJUWMPFjI03b-lXVPoUP9QzF1io').worksheet('Наявність')
 	sheet_records = sheet1.get_all_records()
 	for record in sheet_records:
-		if str(record['Марка авто']) == '':
+		# Проверяем доступно ли авто
+		if str(record['Марка авто']) == '' or str(record['Статус']) != 'Готова' :
 			continue
-		vehicle = dict()
-		if(str(record['Марка авто'])) == '':
-			break
 		if(str(record['Бронювання']) != '' and str(record['Бронювання']) != 'Акція'):
 			continue
+		# Словарь данных об авто
+		vehicle = dict()
 		vehicle['veh_title'] = '{} {} {}'.format(str(record['Марка авто']), str(record['Комплектація']), str(record['Мод рік']))
+		vehicle['veh_comp'] = str(record['Комплектація'])
 		vehicle['veh_vin'] = str(record['VIN'])
+		vehicle['veh_year'] = str(record['Мод рік'])
+		vehicle['veh_mileage'] = str(record[''])
+		vehicle['veh_color_in'] = str(record[''])
+		vehicle['veh_color'] = str(record[''])
+		vehicle['veh_price'] = str(record[''])
+		vehicle['veh_photo'] = str(record[''])
+		vehicle['veh_battery'] = str(record[''])
+		vehicle['veh_info'] = ''
+		vehicle['veh_type'] = 'dealler'
+		vehicle['veh_status'] = 0
 		# Получаем ссылку на ресурс с фото
+		vehicle['veh_folder'] = str(record[''])
 		hplink = sheet1.find(record['VIN'])
-		# hplink_dir = sheet1.acell('D%s'%str(hplink.row),'FORMULA').value
-		# if 'google' in hplink_dir:
-		# 	if 'folders' in hplink_dir:
-		# 	   hplink_dir = hplink_dir.replace('=HYPERLINK("https://drive.google.com/drive/folders/','')
-		# 	else:
-		# 	   hplink_dir = hplink_dir.replace('=HYPERLINK("https://drive.google.com/open?id=',"")
-		# 	   hplink_dir = hplink_dir.replace('";"%s")'%record['VIN'],'')
-		# else:
-		# hplink_dir = hplink_dir.replace('=HYPERLINK("','')
-		# vehicle['veh_dir'] = hplink_dir.replace('";"%s")'%record['VIN'],'')
-		print(vehicle)
 		new_vehicle = Gdrive_vehicles(
 			veh_title = vehicle['veh_title'],
 			veh_vin = vehicle['veh_vin'])
@@ -61,8 +63,10 @@ def grab_vehs(request):
 			new_vehicle.save()
 		except:
 			continue
+
+
 		del(vehicle)
-	return HttpResponse("Seems we're okay")
+	return HttpResponse("<h1>Vehicles has been grabbed successfully</h1>")
 
 def grab_photos(request):
 	veh_list = Gdrive_vehicles.objects.all()
@@ -90,10 +94,6 @@ def grab_photos(request):
 			hplink_dir = sheet1.acell('D%s'%str(hplink.row),'FORMULA').value
 			hplink_dir = hplink_dir.replace('=HYPERLINK("','')
 			veh_folder = hplink_dir = hplink_dir.replace('";"%s")'%record.veh_vin,'')
-			print(veh_folder)
-			# record.veh_folder = str(veh_folder)
-			# record.status = 1
-			# record.save()
 			to_update = Gdrive_vehicles.objects.filter(id=record.id).update(veh_folder=veh_folder, status=1)
 			veh_folder = hplink = ''
-	return HttpResponse("Seems we're fine")
+	return HttpResponse("<h1>Photos has been grabbed successfully</h1>")

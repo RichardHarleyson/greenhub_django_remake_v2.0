@@ -9,11 +9,13 @@ class Vehicle(models.Model):
 	veh_color_in = models.CharField(max_length=30, blank=True)
 	veh_color = models.CharField(max_length=30)
 	veh_price = models.CharField(max_length=10)
+	# Ссылка на сточник фоток
+	veh_folder = models.URLField(max_length=500, blank=True)
 	# Заглавное фото машины, всегда лежит на сервере
 	veh_photo = models.FileField(upload_to='vehicles/%Y/%m_%d/', blank=True)
 	veh_battery = models.CharField(max_length=10, blank=True)
 	veh_info = models.CharField(max_length=100, blank=True)
-	veh_type = models.CharField(max_length=10)
+	veh_type = models.CharField(max_length=20)
 	veh_status = models.PositiveSmallIntegerField(default=0)
 	add_date = models.DateTimeField(auto_now_add=True)
 
@@ -22,7 +24,10 @@ class Vehicle(models.Model):
 
 # Дополнительные фото машины, могут находится как на сервере так и на внешних ресурсах
 class Vehicle_photos(models.Model):
+	# Адрес фото хранимого локально на сервере
 	veh_photo = models.FileField(upload_to='vehicles/%Y/%m_%d/', blank=False)
+	# Ссылка на фото со внешних ресурсов
+	veh_photo_url = models.URLField(max_length=300, blank=True)
 	veh_id = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name='photos')
 	# Тип хранения фото(на сервере, гугл диск или внешний ресурс)
 	type = models.PositiveSmallIntegerField(default=0, blank=False)
