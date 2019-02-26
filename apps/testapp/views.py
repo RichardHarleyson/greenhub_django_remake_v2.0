@@ -71,8 +71,38 @@ def grab_vehs(request):
 		del(new_vehicle)
 	return HttpResponse("<h1>Vehicles has been grabbed successfully</h1>")
 
+
 def grab_photos(request):
-	veh_list = Gdrive_vehicles.objects.all()
+	# Выбираем все записи для которых не собраны фоток
+	veh_list = Gdrive_vehicles.objects.all(veh_status=0)
+	for record in veh_list:
+		if 'http' in record.veh_folder:
+			# Проверяем на тип ссылки
+			if 'google' in record.veh_folder:
+				# обрабатываем гугл диск
+				if 'id' in veh_folder:
+					pass
+				if 'folder' in record.veh_folder:
+					pass
+			if 'manheim' in record.veh_folder:
+				# обрабатываем манхейм
+				pass
+			if 'copart' in record.veh_folder:
+				# обрабатываем копарт
+				pass
+			if 'iaai' in record.veh_folder:
+				# обрабатываем iaai
+				pass
+
+
+
+
+# ================================================
+
+
+
+
+
 	# Setup the Drive v2 API
 	SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
 	store = file.Storage(credentials_path)

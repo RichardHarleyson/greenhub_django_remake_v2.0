@@ -1,7 +1,7 @@
 from django.db import models
 
 class Vehicle(models.Model):
-	veh_title = models.CharField(max_length=100)
+	veh_title = models.CharField(max_length=50)
 	veh_comp = models.CharField(max_length=10, blank=True)
 	veh_vin = models.CharField(max_length=30, unique=True)
 	veh_year = models.CharField(max_length=12, blank=True)
