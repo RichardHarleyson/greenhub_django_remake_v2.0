@@ -38,34 +38,35 @@ def grab_vehs(request):
 			continue
 		if(str(record['Бронювання']) != '' and str(record['Бронювання']) != 'Акція'):
 			continue
-		# Словарь данных об авто
-		vehicle = dict()
-		vehicle['veh_title'] = '{} {} {}'.format(str(record['Марка авто']), str(record['Комплектація']), str(record['Мод рік']))
-		vehicle['veh_comp'] = str(record['Комплектація'])
-		vehicle['veh_vin'] = str(record['VIN'])
-		vehicle['veh_year'] = str(record['Мод рік'])
-		vehicle['veh_mileage'] = str(record[''])
-		vehicle['veh_color_in'] = str(record[''])
-		vehicle['veh_color'] = str(record[''])
-		vehicle['veh_price'] = str(record[''])
-		vehicle['veh_photo'] = str(record[''])
-		vehicle['veh_battery'] = str(record[''])
-		vehicle['veh_info'] = ''
-		vehicle['veh_type'] = 'dealler'
-		vehicle['veh_status'] = 0
 		# Получаем ссылку на ресурс с фото
-		vehicle['veh_folder'] = str(record[''])
-		hplink = sheet1.find(record['VIN'])
-		new_vehicle = Gdrive_vehicles(
-			veh_title = vehicle['veh_title'],
-			veh_vin = vehicle['veh_vin'])
+		hplink = sheet1.find(str(record['VIN']))
+		hplink = sheet1.acell('D%s'%str(hplink.row),'FORMULA').value
+		hplink_dir = hplink_dir.replace('=HYPERLINK("','')
+		veh_folder = hplink_dir.replace('";"%s")'%str(record['VIN']),'')
+		# Формируем запись в таблице
+		new_vehicle = Vehile(
+			veh_title = '{} {} {}'.format(str(record['Марка авто']), str(record['Комплектація']), str(record['Мод рік'])),
+			veh_comp = str(record['Комплектація']),
+			veh_vin = str(record['VIN']),
+			veh_year = str(record['Мод рік']),
+			veh_mileage = str(record['пробіг(км)']).replace('\xa0',''),
+			veh_color_in = str(record['салон']),
+			veh_color = str(record['салон']),
+			veh_price = str(record['Ціна в салоні']).replace('\xa0',''),
+			veh_folder = veh_folder,
+			veh_photo = '',
+			veh_battery = str(record['SOH']),
+			veh_info = '',
+			veh_type = 'dealler',
+			veh_status = 0,
+			)
 		try:
 			new_vehicle.save()
 		except:
+			print('Could not save %s record'%str(record['VIN']))
 			continue
-
-
-		del(vehicle)
+		print('Finished with %s'%str(record['VIN']))
+		del(new_vehicle)
 	return HttpResponse("<h1>Vehicles has been grabbed successfully</h1>")
 
 def grab_photos(request):
