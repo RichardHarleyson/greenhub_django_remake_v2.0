@@ -8,6 +8,7 @@ class VehiclePictureInline(admin.TabularInline):
 
 class MainAmdmin(admin.ModelAdmin):
 	list_display = (
+		'id',
 		'veh_title',
 		'veh_comp',
 		'veh_vin',

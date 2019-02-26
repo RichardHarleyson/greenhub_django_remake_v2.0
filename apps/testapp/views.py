@@ -34,17 +34,19 @@ def grab_vehs(request):
 	sheet_records = sheet1.get_all_records()
 	for record in sheet_records:
 		# Проверяем доступно ли авто
-		if str(record['Марка авто']) == '' or str(record['Статус']) != 'Готова' :
+		if str(record['Марка авто']) == '':
+			continue
+		if str(record['Статус']) != '' and  str(record['Статус']) != 'Готова':
 			continue
 		if(str(record['Бронювання']) != '' and str(record['Бронювання']) != 'Акція'):
 			continue
 		# Получаем ссылку на ресурс с фото
 		hplink = sheet1.find(str(record['VIN']))
 		hplink = sheet1.acell('D%s'%str(hplink.row),'FORMULA').value
-		hplink_dir = hplink_dir.replace('=HYPERLINK("','')
+		hplink_dir = hplink.replace('=HYPERLINK("','')
 		veh_folder = hplink_dir.replace('";"%s")'%str(record['VIN']),'')
 		# Формируем запись в таблице
-		new_vehicle = Vehile(
+		new_vehicle = Vehicle(
 			veh_title = '{} {} {}'.format(str(record['Марка авто']), str(record['Комплектація']), str(record['Мод рік'])),
 			veh_comp = str(record['Комплектація']),
 			veh_vin = str(record['VIN']),
@@ -63,7 +65,7 @@ def grab_vehs(request):
 		try:
 			new_vehicle.save()
 		except:
-			print('Could not save %s record'%str(record['VIN']))
+			print('Could not save %s record. Check if there is one already'%str(record['VIN']))
 			continue
 		print('Finished with %s'%str(record['VIN']))
 		del(new_vehicle)
