@@ -24,12 +24,11 @@ def grab_vehs(request):
 	    flow = client.flow_from_clientsecrets(client_secret_path, SCOPES)
 	    creds = tools.run_flow(flow, store)
 	service = build('drive', 'v2', http=creds.authorize(Http()))
-
 	# Подключаемся к google sheets
 	scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 	creds = ServiceAccountCredentials.from_json_keyfile_name(client_json_path, scope)
 	client = gspread.authorize(creds)
-
+	# Подключаемся к листу
 	sheet1 = client.open_by_key('1nzwOMZIHoHFhU-VneJUWMPFjI03b-lXVPoUP9QzF1io').worksheet('Наявність')
 	sheet_records = sheet1.get_all_records()
 	for record in sheet_records:

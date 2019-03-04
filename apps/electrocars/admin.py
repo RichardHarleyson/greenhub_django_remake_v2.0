@@ -15,6 +15,7 @@ class MainAmdmin(admin.ModelAdmin):
 		'veh_year',
 		'veh_mileage',
 		'veh_price',
+		'veh_folder',
 		'veh_type',
 		'veh_status',
 		'add_date',
