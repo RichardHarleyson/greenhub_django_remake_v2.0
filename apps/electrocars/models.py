@@ -1,3 +1,5 @@
+#/home/greenhub/django/django_env/bin/env python
+# -*- coding: utf-8 -*-
 from django.db import models
 
 class Vehicle(models.Model):
@@ -15,7 +17,8 @@ class Vehicle(models.Model):
 	veh_photo = models.FileField(upload_to='vehicles/%Y/%m_%d/', blank=True)
 	veh_battery = models.CharField(max_length=10, blank=True)
 	veh_info = models.CharField(max_length=100, blank=True)
-	veh_type = models.CharField(max_length=20)
+	veh_type_choice = [('salon','салон'),('dealler','диллер')]
+	veh_type = models.CharField(max_length=20, choices=veh_type_choice, default=veh_type_choice[0])
 	veh_status = models.PositiveSmallIntegerField(default=0)
 	add_date = models.DateTimeField(auto_now_add=True)
 
