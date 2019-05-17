@@ -16,9 +16,9 @@
 	<div class="container">
 		<div class="row special-font">
 			<div class="col-md-7">
-				<div class="">
+				<div class="image veh_image">
 						<!-- Image corousel -->
-						<img src="{{ car.veh_photo.url }}" alt="Vehicle image here" class="img-thumbnail">
+						<img class="img-fluid" src="{{ car.veh_photo.url }}" alt="Vehicle image here" class="img-thumbnail">
 				</div>
 			</div>
 			<div class="col-md-5">
@@ -36,10 +36,11 @@
 					<div class="col">
 						<p class='g-font-size-18--xs'>{{car.veh_vin}}</p>
 						<p class='g-font-size-18--xs'>{{car.veh_mileage}}км</p>
-						<p class='g-font-size-18--xs'>{{car.veh_comp}}</p>
-						<p class='g-font-size-18--xs'>{{car.veh_color}}</p>
-						<p class='g-font-size-18--xs'>{{car.veh_color_in}}</p>
-						<p class='g-font-size-18--xs'>{{car.veh_battery}}</p>
+
+						<p class='g-font-size-18--xs'>{% if car.veh_comp == ''%} _ {% else %} {{car.veh_comp}} {% endif %}</p>
+						<p class='g-font-size-18--xs'>{% if car.veh_color == ''%} _ {% else %} {{car.veh_color}} {% endif %}</p>
+						<p class='g-font-size-18--xs'>{% if car.veh_color_in == ''%} _ {% else %} {{car.veh_color_in}} {% endif %}</p>
+						<p class='g-font-size-18--xs'>{% if car.veh_battery == ''%} _ {% else %} {{car.veh_battery}} {% endif %}</p>
 					</div>
 				</div>
 				<a class="w-50">

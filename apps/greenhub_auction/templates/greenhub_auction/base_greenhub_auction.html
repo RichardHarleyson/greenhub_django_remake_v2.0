@@ -1,0 +1,381 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	{% block title %}
+		<title>GreenHub - Аукционы</title>
+	{% endblock %}
+	<meta name="description" content="GreenHub — Аукционы США, топовые авто по Американским ценам. Ford Focus, Nissan Leaf, Tesla Model S, Fiat 500, все доступные модели в австосалоне электромобилей GreenHub в городе Днепр!">
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="contrainer-fluid aux_header" style="background-image: url('{% static 'img/auctions/4_short_compressed.jpg'%}');">
+
+<div class="container h-100">
+
+	<div class="row h-100">
+
+		<div class="col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12">
+
+		</div>
+		<div class="col-xl-5 col-lg-6 col-md-6 col-sm-12 col-12  align-self-center  my-auto">
+			<form class=" bg-secondary" style="opacity: 0.95;">
+
+				<div class=" p-3 bg-dark text-success text-center mb-2"  style="opacity: 0.95;">
+					<h4>Закажи бесплатный подбор авто уже <u>сейчас</u>!</h4>
+					<h4>Не жди удобного момента!</h4>
+				</div>
+				<div class="p-3">
+					<div class="form-group">
+						<select class="form-control" name="veh_type">
+							<option selected>Тип Машины</option>
+							<option value="1">Седан</option>
+							<option value="2">Купе</option>
+							<option value="3">Внедорожник</option>
+							<option value="4">Минивен</option>
+							<option value="5">Пикап</option>
+						</select>
+					</div>
+
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend pr-3 w-50">
+							<select class="form-control" name="veh_year1">
+								<option selected>От ...</option>
+								<option value="от 2011">от 2011</option>
+								<option value="от 2012">от 2012</option>
+								<option value="от 2013">от 2013</option>
+								<option value="от 2014">от 2014</option>
+								<option value="от 2015">от 2015</option>
+								<option value="от 2016">от 2016</option>
+								<option value="от 2017">от 2017</option>
+								<option value="от 2018">от 2018</option>
+							</select>
+					  </div>
+					  <div class="input-group-append pl-3 w-50">
+							<select class="form-control" name="veh_year2">
+								<option selected>До ...</option>
+								<option value="до 2011">до 2011</option>
+								<option value="до 2012">до 2012</option>
+								<option value="до 2013">до 2013</option>
+								<option value="до 2014">до 2014</option>
+								<option value="до 2015">до 2015</option>
+								<option value="до 2016">до 2016</option>
+								<option value="до 2017">до 2017</option>
+								<option value="до 2018">до 2018</option>
+								<option value="до 2019">до 2019</option>
+							</select>
+					  </div>
+					</div>
+
+					<div class="form-group">
+						<select class="form-control" name="veh_budget">
+							<option selected>Бюджет</option>
+							<option value="Менее 7000$">Менее 7000$</option>
+							<option value="7000$ - 10000$">7000$ - 10000$</option>
+							<option value="10000$ - 15000$">10000$ - 15000$</option>
+							<option value="15000$ - 20000$">15000$ - 20000$</option>
+							<option value="20000$ - 30000$">20000$ - 30000$</option>
+							<option value="30000$ - 40000$">30000$ - 40000$</option>
+							<option value="40000$ - 50000$">40000$ - 50000$</option>
+							<option value="50000$ +">50000$ +</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="tel" name="phone" placeholder="+38 (999) 99-99-999">
+					</div>
+
+					<div class="form-group">
+						<textarea class="form-control" name="message" rows="2" placeholder="Комментарий"></textarea>
+					</div>
+
+					<div class="form-group text-center">
+						<button class="btn btn-lg text-success bg-dark w-50 mx-auto" type="submit">Заказать</button>
+					</div>
+
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</div>
+</div>
+
+<div class="container my-3">
+	<div class="text-center mb-2">
+		<h1>Автомобили с аукционов США</h1>
+	</div>
+	<div class="mb-2 text-center">
+		<img class="mx-2 shadow" src="{% static "img/auctions/iaai_compressed_200.jpg"%}">
+		<img class="mx-2 shadow" src="{% static "img/auctions/manheim_compressed_200.jpg"%}">
+		<img class="mx-2 shadow" src="{% static "img/auctions/copart_compressed_200.jpg"%}">
+	</div>
+</div>
+
+<div class="parallax" style="background-image: url('{% static 'img/auctions/5.jpg'%}');">
+
+<div class="container h-100">
+	<div class="m-auto pt-5 pb-2" style="opacity:0.9;">
+		<div class="bg-dark text-white text-center p-4">
+				<h3>Почему авто с аукционов США так популярны?</h3>
+				<p>
+					Этика использования автомобилей в США разительно отличается. Высокое качество тех.обслуживания поддерживает автомобиль в состоянии
+					порой неотличимым от заводского. Не говоря уже о качестве американских дорог, что не оставляют и шанса на скорый износ.
+					Однако уже через несколько лет после покупки машины, владелец старается заменить авто на более новое.
+				</p>
+				<p>
+					Эти ключевые факторы позволяют сохранить состояние авто, но значительно снизить его цену. На популярных аукционах Manheim,
+					 IAAI и Copart частво стречаются автомобили по цене в несколько тысяч, тогда как средняя мировая рыночная цена может быть в 2-3 раз дороже.
+				</p>
+				<p>
+					Льготы на растаможку зарубежных авто так же позволяют купить авто из США и зарегестрировать его в Украине по гораздо более привлекательно цене.
+				</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<div class="my-4">
+	<div class="container">
+		<div class="text-center">
+			<h3>Наглядная разница в цене</h3>
+			<h4 class="text-success">Экономия до 50%</h4>
+		</div>
+		<div class="row mt-3">
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col12">
+				<div class="card my-2 mx-auto" style="min-width:15rem; max-width: 18rem;">
+				  <img src="https://via.placeholder.com/200x170" class="card-img-top">
+				  <div class="card-body border-bottom p-3">
+				    <h5 class="card-title text-center">Nissan Leaf 2015</h5>
+						<h5 class="text-success text-center">Цена Аукциона: 4700$</h5>
+				    <div class="card-text border-top">
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Аукционный сбор: 480$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Доставка: 200$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Растаможка: 1500$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Выгрузка и брокер: 600$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Сертификация: 300$</span>
+							</div>
+							<div class="card-i-size border-bottom">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Комиссия: 500$</span>
+							</div>
+							<div class="text-center">
+								<h5>Рыночная цена: <span class="text-danger">11000$</span></h5>
+							</div>
+							<div class="text-center">
+								<h5>GreenHub цена: <span class="text-success">7280$</span></h5>
+							</div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col12">
+				<div class="card my-2 mx-auto" style="min-width:15rem; max-width: 18rem;">
+				  <img src="https://via.placeholder.com/200x170" class="card-img-top">
+				  <div class="card-body border-bottom p-3">
+				    <h5 class="card-title text-center">Nissan Leaf 2015</h5>
+						<h5 class="text-success text-center">Цена Аукциона: 4700$</h5>
+				    <div class="card-text border-top">
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Аукционный сбор: 480$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Доставка: 200$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Растаможка: 1500$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Выгрузка и брокер: 600$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Сертификация: 300$</span>
+							</div>
+							<div class="card-i-size border-bottom">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Комиссия: 500$</span>
+							</div>
+							<div class="text-center">
+								<h5>Рыночная цена: <span class="text-danger">11000$</span></h5>
+							</div>
+							<div class="text-center">
+								<h5>GreenHub цена: <span class="text-success">7280$</span></h5>
+							</div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col12">
+				<div class="card my-2 mx-auto" style="min-width:15rem; max-width: 18rem;">
+				  <img src="https://via.placeholder.com/200x170" class="card-img-top">
+				  <div class="card-body border-bottom p-3">
+				    <h5 class="card-title text-center">Nissan Leaf 2015</h5>
+						<h5 class="text-success text-center">Цена Аукциона: 4700$</h5>
+				    <div class="card-text border-top">
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Аукционный сбор: 480$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Доставка: 200$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Растаможка: 1500$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Выгрузка и брокер: 600$</span>
+							</div>
+							<div class="card-i-size">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Сертификация: 300$</span>
+							</div>
+							<div class="card-i-size border-bottom">
+								<i class="far fa-check-circle float-left text-success"></i>
+								<span class="pl-2">Комиссия: 500$</span>
+							</div>
+							<div class="text-center">
+								<h5>Рыночная цена: <span class="text-danger">11000$</span></h5>
+							</div>
+							<div class="text-center">
+								<h5>GreenHub цена: <span class="text-success">7280$</span></h5>
+							</div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="parallax" style="background-image: url('{% static 'img/auctions/1_compressed.jpg'%}');">
+
+	<div class="container h-100">
+		<div class="m-auto pt-5 pb-2" style="opacity:0.9;">
+			<div class="bg-dark text-white text-center p-4">
+					<h3>Сколько ждать авто с аукциона США?</h3>
+					<p>
+						Весь процесс покупки авто, начиная от торгов на аукционе и заканчивая передачей ключей занимает от 5 недель.
+					</p>
+					<p>
+						Менеджеры детально изучили каждый этап перевоза машины, что позволило добиться максимально быстрой и эффективной работы на этапах торгов,
+						перевозки авто в порт США и оформления документов когда авто достигло Украины. Это позволяет нам точно знать где, когда и что происходит с
+						вашим автомобилем.
+					</p>
+					<p>
+						Для большего удобства, мы предлагаем, при желании, самостоятельно отслеживать перемещение авто по таймлайну.
+					</p>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+<div class="container my-5">
+	<div class="text-center">
+		<h3 class="text-dark my-2">Отслеживай машину в пути</h3>
+		<h4 class="text-dark mt-2">Когда это удобно <u>тебе</u></h4>
+		<h4 class="text-success mt-2">Таймлайн поможет узнать примерные сроки каждого этапа</h4>
+	</div>
+	<div class="d-none d-md-block">
+		<div id="timeline-wrap">
+		  <div id="timeline"></div>
+
+		  <div class="marker mfirst timeline-icon bg-success one" data-toggle="tooltip" data-placement="top" title="Ожидаемая дата: 23.04.19">
+	      <i class="fas fa-gavel"></i>
+				<span class="text-dark">Торги</span>
+		  </div>
+
+		  <div class="marker m2 timeline-icon bg-success two" data-toggle="tooltip" data-placement="top" title="Ожидаемая дата: 25.04.19">
+	      <i class="fas fa-dollar-sign"></i>
+				<span class="text-dark">Оплата</span>
+		  </div>
+
+		  <div class="marker m3 timeline-icon bg-success three" data-toggle="tooltip" data-placement="top" title="Ожидаемая дата: 15.06.19">
+		    <i class="fas fa-ship"></i>
+				<span class="text-dark" style="margin-left: -5px;">Доставка</span>
+		  </div>
+
+		  <div class="marker m4 timeline-icon bg-danger four" data-toggle="tooltip" data-placement="top" title="Ожидаемая дата: 18.06.19">
+		    <i class="fas fa-file-invoice"></i>
+				<span class="text-dark" style="margin-left: -5px;">Таможня</span>
+		  </div>
+
+		  <div class="marker mlast timeline-icon bg-danger five" data-toggle="tooltip" data-placement="top" title="Ожидаемая дата: 22.06.19">
+		    <i class="fas fa-key"></i>
+				<span class="text-dark" style="	margin-left: -10px;">Передача</span>
+		  </div>
+
+		</div>
+	</div>
+</div>
+
+
+<!-- <div class="parallax" style="background-image: url('{% static 'img/auctions/2_compressed.png'%}');"> -->
+<div class="parallax" style="background-image: url('{% static 'img/auctions/3.webp'%}');">
+	<div class="container h-100">
+		<div class="m-auto pt-5 pb-2" style="opacity:0.9;">
+			<div class="bg-dark text-white text-center p-4">
+					<h3>Не знаете с чего начать?</h3>
+					<p>
+						Оставьте заявку на сайте, что бы наши менеджеры смогли с вами связаться. Уточнив ваши предпочтения, мы сможем подобрать подходяшие авто на ближайших торгах.
+					</p>
+					<p>
+						Если автомобиль вам подойдет, мы выйграем его для вас и оформим все необходимые документы. Вам останется только ждать когда авто прибудет в Украину.
+					</p>
+					<p>
+						Как только авто окажется в порту Украины, мы растоможим его, сертифицируем, и переправим в Днепр. Вам нужно будет лишь прийти и забрать у нас ключи.
+					</p>
+					<p>
+						Да, все настолько просто.
+					</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="my-5">
+	<div class="container">
+		<div class="text-center">
+			<h3>Множество авто из США уже в Автосалоне <span class="text-success">GreenHub</span></h3>
+		</div>
+		<div class="text-center mt-4 d-none d-md-block">
+			<div class="btn-group w-50 mx-auto">
+					<a class="w-100" href="/electrocars">
+							<button class="btn btn-lg btn-outline-success btn-color-scheme w-100">Авто в наличии</button>
+					</a>
+					<a class="w-100">
+							<button class="btn btn-lg btn-outline-success btn-color-scheme w-100"  data-toggle="modal" data-target="#testdrivemodal">Тест-драйв</button>
+					</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

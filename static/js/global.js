@@ -2,12 +2,32 @@
  * Created by Валентин on 29.05.2018.
  */
 
+//timeline
+
+//$(".timeline-panel").hide(0);
+
+$("i").click(function() {
+	    $('.timeline-panel').show(0);
+});
+
+$(document).ready(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+// ==============================================
+
+
+$(document).ready(function(){
+	Array.prototype.forEach.call(document.querySelectorAll('.pd-parallax'), function(elem){
+		elem.style.backgroundImage='url('+elem.getAttribute('data-bg-image')+')';
+	});
+});
+
 // Модальное окно записи на тест драйв
 $(document).ready(function(){
 		$("#f1_test_drive").submit(function(){
 			var form_data = $(this).serialize();
 			$.ajax({
-				url: $('#f1_test_drive').attr('action'),
+				url: 'http://greenhub.pro/testdrive_form',
 				type: "POST",
 				data: form_data,
 				success: function(data) {
@@ -29,7 +49,7 @@ $(document).ready(function(){
     $("#call-me-form").submit(function() { //устанавливаем событие отправки для формы с id=form
         var form_data = $(this).serialize(); //собераем все данные из формы
         $.ajax({
-            url: $('#call-me-form').attr('action'), //путь до php фаила отправителя
+            url: 'http://greenhub.pro/callme_form', //путь до php фаила отправителя
             type: "POST",
             data: form_data,
             success: function() {

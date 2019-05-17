@@ -15,7 +15,7 @@ class Client_Task(models.Model):
 	veh_year = models.CharField(max_length=12, blank=True)
 	veh_mileage = models.CharField(max_length=20, blank=True)
 	veh_color_in = models.CharField(max_length=30, blank=True)
-	veh_color = models.CharField(max_length=30)
+	veh_color = models.CharField(max_length=30, blank=True)
 	add_date = models.DateTimeField(auto_now_add=True)
 
 def full_name(self):

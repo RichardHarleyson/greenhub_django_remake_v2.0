@@ -21,7 +21,7 @@ def testdrive_form(request):
 	'Запись на тест драйв',
 	'Имя: %s. Тел: %s'%(request.POST.get('name'), request.POST.get('phone')),
 	'greenhub@greenhub.pro',
-	['richard.harleyson@gmail.com'],
+	['richard.harleyson@gmail.com','greenhub.ua@gmail.com'],
 	fail_silently=False,
 	)
 	return HttpResponse(True)
@@ -42,7 +42,7 @@ def callme_form(request):
 	'Перезвонить',
 	'Имя: %s. Тел: %s'%(request.POST.get('name'), request.POST.get('phone')),
 	'greenhub@greenhub.pro',
-	['richard.harleyson@gmail.com'],
+	['richard.harleyson@gmail.com', 'greenhub.ua@gmail.com'],
 	fail_silently=False,
 	)
 	return HttpResponse(True)

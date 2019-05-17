@@ -23,7 +23,7 @@ class Vehicle(models.Model):
 	add_date = models.DateTimeField(auto_now_add=True)
 
 	def full_name(self):
-		return '{} {} {}'.format(self.veh_title, self.veh_comp, self.veh_year)
+		return self.veh_title
 
 # Дополнительные фото машины, могут находится как на сервере так и на внешних ресурсах
 class Vehicle_photos(models.Model):
