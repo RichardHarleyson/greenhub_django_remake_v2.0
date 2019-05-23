@@ -203,7 +203,7 @@ form > .form-group > .form-control{
 }
 
 .my_footer{
-    height: 150px;
+    min-height: 160px;
     background-color: #343a40;
 }
 

@@ -10,3 +10,6 @@ def contacts(request):
 
 def charger_map(request):
 	return render(request, 'charger_map.html')
+
+def policy(request):
+	return render(request, 'policy.html')

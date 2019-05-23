@@ -15,10 +15,27 @@ $(document).ready(function () {
 })
 // ==============================================
 
-
 $(document).ready(function(){
 	Array.prototype.forEach.call(document.querySelectorAll('.pd-parallax'), function(elem){
 		elem.style.backgroundImage='url('+elem.getAttribute('data-bg-image')+')';
+	});
+});
+
+//Aux_client
+$(document).ready(function(){
+	$('#aux_client_form').submit(function(){
+		event.preventDefault();
+		var form_data = $(this).serialize();
+		$.ajax({
+			url : $(this).attr('action'),
+			type: 'POST',
+			data: form_data,
+			success: function(res){
+				$('form[id=aux_client_form]').trigger('reset');
+				// alert(form_data);
+				$('.message_status').html('<h5>Менеджер подберет авто и свяжется с вами</h5>');
+			},
+		});
 	});
 });
 
@@ -27,7 +44,7 @@ $(document).ready(function(){
 		$("#f1_test_drive").submit(function(){
 			var form_data = $(this).serialize();
 			$.ajax({
-				url: 'http://greenhub.pro/testdrive_form',
+				url: $(this).attr('action'),
 				type: "POST",
 				data: form_data,
 				success: function(data) {
@@ -49,7 +66,7 @@ $(document).ready(function(){
     $("#call-me-form").submit(function() { //устанавливаем событие отправки для формы с id=form
         var form_data = $(this).serialize(); //собераем все данные из формы
         $.ajax({
-            url: 'http://greenhub.pro/callme_form', //путь до php фаила отправителя
+            url: $(this).attr('action'), //путь до php фаила отправителя
             type: "POST",
             data: form_data,
             success: function() {
@@ -71,7 +88,7 @@ $(document).ready(function(){
     $('.iwantcarform').submit(function (){
         var form_data = $(this).serialize(); //собераем все данные из формы
         $.ajax({
-            url: "https://greenhub.pro/php/iwantcar.php", //путь до php фаила отправителя
+            url: $(this).attr('action'), //путь до php фаила отправителя
             type: "POST", //Метод отправки
             data: form_data,
             success: function(data) {
@@ -152,3 +169,14 @@ $(document).on('click','.set-photo',function(){
         }
     });
 });
+// lot_form
+$(document).ready(function(){
+	$("form.lot_form :input").change(function(){
+		var item = $(this).parent().find('label');
+		lot_total_price(this, $(this).data('min'), $(this).data('max'), item);
+	});
+});
+
+function lot_total_price(price, min, max, label){
+	label.html("<h5>Всего: <span class='text-success'>"+(Number($(price).val()) + Number(min))+"$ - "+(Number($(price).val()) + Number(max))+"$</span></h5>")
+}

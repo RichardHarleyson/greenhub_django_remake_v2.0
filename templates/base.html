@@ -97,7 +97,7 @@
 	                        <a class="nav-link font-size-18 g-color--white" href="/electrocars">Электромобили</a>
 	                    </li>
 	                    <li class="nav-item">
-	                        <a class="nav-link font-size-18 g-color--white" href="/greenhub_auction">Аукционы</a>
+	                        <a class="nav-link font-size-18 g-color--white" href="/greenhub_auction">Аукцион</a>
 	                    </li>
 	                    <li class="nav-item">
 	                        <a class="nav-link font-size-18 g-color--white" href="/charger_map">Карта зарядок</a>
@@ -141,7 +141,7 @@
 	                            <a class="nav-link g-font-size-20--lg" href="/electrocars">Электромобили</a>
 	                        </li>
 	                        <li class="nav-item active">
-	                            <a class="nav-link g-font-size-20--lg" href="/greenhub_auction">Аукционы</a>
+	                            <a class="nav-link g-font-size-20--lg" href="/greenhub_auction">Аукцион</a>
 	                        </li>
 	                        <li class="nav-item active">
 	                            <a class="nav-link g-font-size-20--lg" href="/charger_map">Карта зарядок</a>
@@ -168,13 +168,13 @@
 	                    </button>
 	                </div>
 	                <div class="container" >
-	                    <form class="form" id="f1_test_drive" action="testdrive_form">
+	                    <form class="form" id="f1_test_drive" action="/testdrive_form">
 												{% csrf_token %}
 	                        <div class="form-group-lg">
 	                            <input class="form-control form-control-lg form-custom-inputs" id="ftd1_n" type="text" name="name" placeholder="Имя" maxlength="30">
 	                            <input class="form-control form-control-lg form-custom-inputs" id="ftd1_p" type="tel" name="phone" placeholder="Телефон*" maxlength="12">
 	                            <!-- <button onclick="fbq_onClick()" type="submit" id="test_drive_submit" class="btn btn-lg btn-outline-success btn-success">Записаться</button> -->
-															<button type="submit" id="test_drive_submit" class="btn btn-lg btn-outline-success btn-success">Записаться</button>
+															<button type="submit" onclick="fbq_onClick()" id="test_drive_submit" class="btn btn-lg btn-outline-success btn-success">Записаться</button>
 															<div class="h3 text-center modal-texts hidden" id="tdfa" >Отлично! Сейчас перезвоним</div>
 	                        </div>
 	                    </form>
@@ -193,13 +193,13 @@
 	                    </button>
 	                </div>
 	                <div class="container" >
-	                    <form class="form" id="call-me-form" action="callme_form">
+	                    <form class="form" id="call-me-form" action="/callme_form">
 												{% csrf_token %}
 	                        <div class="form-group-lg">
 	                            <input class="form-control form-control-lg form-custom-inputs" id="cm_n" type="text" name="name" placeholder="Имя" maxlength="30">
 	                            <input class="form-control form-control-lg form-custom-inputs" id="cm_p" type="tel" name="phone" placeholder="Телефон*" maxlength="12">
 	                            <!-- <button onclick="fbq_onClick()" type="submit" id="call-me-submit" class="btn btn-lg btn-outline-success btn-success">Свяжитесь со мной</button> -->
-															<button type="submit" id="call-me-submit" class="btn btn-lg btn-outline-success btn-success">Свяжитесь со мной</button>
+															<button type="submit" onclick="fbq_onClick()" id="call-me-submit" class="btn btn-lg btn-outline-success btn-success">Свяжитесь со мной</button>
 															<div class="h3 text-center modal-texts hidden" id="cma" >Отлично! Сейчас перезвоним</div>
 	                        </div>
 	                    </form>
@@ -221,13 +221,28 @@
 
 		{% block footer %}
 		<div class="my_footer">
-				<div class="row text-center">
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
-								<img class="align-middle" src="{% static "img/new_logosmall.jpg"%}" alt="logo_here" style="margin-top: 40px">
+			<div class="container my-auto h-100" style="height: 160px !important;">
+				<div class="row text-center h-100 text-white align-items-center">
+						<div class="col-xl-4 col-lg-4 d-none d-lg-block align-self-center">
+							<a href="/"><img class="m-auto" src="{% static "img/new_logosmall.jpg"%}" alt="logo_here"></a>
 						</div>
-						<div class="col-md-4"></div>
+						<div class="col-xl-4 col-lg-4 col-md-5 align-self-center">
+							<div class="text-center m-auto">
+								<span style="font-size: 1.1rem;">greenhub.ua@gmail.com</span><br>
+								<span style="font-size: 1.1rem;">+38 (073) 039-4449</span><br>
+								<span style="font-size: 1.1rem;">+38 (067) 561-1161</span>
+							</div>
+						</div>
+						<div class="col-xl-4 col-lg-4 col-md-6 align-self-center">
+							<div class="text-center m-auto">
+								<div class="pt-3">
+									<p><span style="font-size: 1.1rem;"><a href="/policy" class="text-white">Политика конфиденциальности</a></span></p>
+									<p><span style="font-size: 1rem;">GreenHub 2019 Copyright &copy;</span></p>
+								</div>
+							</div>
+						</div>
 				</div>
+			</div>
 		</div>
 		{% endblock %}
 	</div>

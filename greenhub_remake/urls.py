@@ -27,12 +27,13 @@ urlpatterns = [
 	path('', views.index, name='index'),
 	path('contacts/', views.contacts, name='contacts'),
 	path('charger_map/', views.charger_map, name='charger_map'),
+	path('policy/', views.policy, name="policy"),
 	# Apps pages
 	path('electrocars/', include('apps.electrocars.urls')),
 	path('electromoto/', include('apps.electromoto.urls')),
 	path('testapp/', include('apps.testapp.urls')),
 	path('testdrive_form', clients_views.testdrive_form, name='testdrive_form'),
 	path('callme_form', clients_views.callme_form, name='callme_form'),
-	path('greenhub_auction', include('apps.greenhub_auction.urls'), name='greenhub_auction')
+	path('greenhub_auction/', include('apps.greenhub_auction.urls'), name='greenhub_auction')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
