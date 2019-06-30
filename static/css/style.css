@@ -1,5 +1,27 @@
 /* timeline */
 
+.too_big{
+	/* word-break: break-all; */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.too_big:hover{
+	background: #f0f0f0; /* Цвет фона */
+	white-space: normal; /* Обычный перенос текста */
+}
+
+table{
+	table-layout: auto;
+}
+
+.side_icons:hover{
+	color: white !important;
+}
+
+.clicker{
+	cursor:pointer;
+}
 
 #timeline-wrap{
   margin:13% 20%;
@@ -78,6 +100,9 @@ transition: all 300ms ease;
 
 /* =================== */
 
+body,html{
+	height: 100%;
+}
 
 body{
     overflow-x: hidden;!important;

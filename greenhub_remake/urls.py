@@ -34,6 +34,7 @@ urlpatterns = [
 	path('testapp/', include('apps.testapp.urls')),
 	path('testdrive_form', clients_views.testdrive_form, name='testdrive_form'),
 	path('callme_form', clients_views.callme_form, name='callme_form'),
-	path('greenhub_auction/', include('apps.greenhub_auction.urls'), name='greenhub_auction')
+	path('greenhub_auction/', include('apps.greenhub_auction.urls'), name='greenhub_auction'),
+	path('gh_crm/', include('apps.gh_crm.urls'), name="gh_crm"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

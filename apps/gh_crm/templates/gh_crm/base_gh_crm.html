@@ -1,0 +1,216 @@
+{% extends 'base_crm.html' %}
+
+{% block head %}
+	<title>
+		{% block title %}
+			GreenHub - Клиенты
+		{% endblock %}
+	</title>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">GreenHub Client Managment</a>
+</nav>
+
+<div class="modal fade" id="create_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Новое событие</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="m-3" id="crm_form_add_new_event" action="/gh_crm/add_event">
+					{% csrf_token %}
+					<input type="hidden" name="event_id" data-event_id="">
+					<div class="form-group">
+						<label><b>Клиент</b></label>
+						<select class="form-control" name="client_id">
+							{% for client in clients %}
+							<option value="{{client.id}}">{{client.client_name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="form-group">
+						<label><b>Ответственный</b></label>
+						<select class="form-control" name="responsible">
+							<option value="Анатолий">Анатолий</option>
+							<option value="Александр">Александр</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label><b>Дата события</b></label>
+						<div class="input-group date datepicker" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+					    <input type="text" class="form-control" name="event_date">
+					    <div class="input-group-addon">
+					        <span class="glyphicon glyphicon-th"></span>
+					    </div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label><b>Событие</b></label>
+						<select class="form-control" name="event_type">
+							<option value="Звонок">Звонок</option>
+							<option value="Встреча">Встреча</option>
+							<option value="Предложение">Предложение</option>
+							<option value="Договоренность">Договоренность</option>
+							<option value="Подписание контракта">Подписание контракта</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label><b>Комментарий</b></label>
+						<textarea class="form-control" rows="3" name="comment"></textarea>
+					</div>
+					<div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+		        <button type="submit" class="btn btn-success">Сохранить</button>
+		      </div>
+					<div class="text-center" id="event_add_status">
+
+					</div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="create_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Новое событие</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<form id="crm_form_add_new_client" action="/gh_crm/add_client">
+					{% csrf_token %}
+					<div class="form-group">
+						<label><b>Имя</b></label>
+						<input class="form-control" name="client_name">
+					</div>
+					<input type="hidden" name="client_id" data-client_id="">
+					<div class="form-group">
+						<label><b>Чего клиент хочет</b></label>
+						<select class="form-control" name="client_type">
+							<option value="Электромобиль: Автосалон">Электромобиль: Автосалон</option>
+							<option value="Электромобиль: Аукцион">Электромобиль: Аукцион</option>
+							<option value="Аукцион">Аукцион</option>
+							<option value="Ремонт Авто">Ремонт Авто</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label><b>Телефон</b></label>
+						<input class="form-control" name="client_phone">
+					</div>
+					<div class="form-group">
+						<label><b>Email</b></label>
+						<input class="form-control" name="client_email">
+					</div>
+					<div class="form-group">
+						<label><b>Комментарий</b></label>
+						<textarea class="form-control"rows="3" name="comment"></textarea>
+					</div>
+					<div class="custom-control custom-checkbox text-center">
+					  <input type="checkbox" checked class="custom-control-input" id="customCheck1" name="isactive">
+					  <label class="custom-control-label" for="customCheck1">Активный Клиент</label>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+						<button type="submit" class="btn btn-success">Сохранить</button>
+					</div>
+					<div class="text-center" id="client_add_status">
+
+					</div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="add_new_client_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Новый Клиент</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<form id="crm_form_add_new_client" action="/gh_crm/add_client">
+					{% csrf_token %}
+					<div class="form-group">
+						<label><b>Имя</b></label>
+						<input class="form-control" name="client_name" data-client_id="">
+					</div>
+					<div class="form-group">
+						<label><b>Чего клиент хочет</b></label>
+						<select class="form-control" name="client_type">
+							<option value="Электромобиль: Автосалон">Электромобиль: Автосалон</option>
+							<option value="Электромобиль: Аукцион">Электромобиль: Аукцион</option>
+							<option value="Аукцион">Аукцион</option>
+							<option value="Ремонт Авто">Ремонт Авто</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label><b>Телефон</b></label>
+						<input class="form-control" name="client_phone">
+					</div>
+					<div class="form-group">
+						<label><b>Email</b></label>
+						<input class="form-control" name="client_email">
+					</div>
+					<div class="form-group">
+						<label><b>Комментарий</b></label>
+						<textarea class="form-control"rows="3" name="comment"></textarea>
+					</div>
+					<div class="custom-control custom-checkbox text-center">
+					  <input type="checkbox" checked class="custom-control-input" id="customCheck1" name="isactive">
+					  <label class="custom-control-label" for="customCheck1">Активный Клиент</label>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+						<button type="submit" class="btn btn-success">Сохранить</button>
+					</div>
+					<div class="text-center" id="client_add_status">
+
+					</div>
+				</form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid h-100" id="crm_core">
+	<div class="row h-100">
+		<div class="col-xl-1 col-lg-1 col-md-1 col bg-dark text-center" style="max-width: 80px;">
+			<i class="my-3 fas fa-user-circle fa-3x text-white-50" id="curr_user" data-toggle="tooltip" data-placement="right" title="Текущий пользователь: ..."></i>
+			<i class="my-3 fas fa-user-plus fa-2x text-white-50" id="add_new_client" data-toggle="modal" data-target="#add_new_client_modal" data-toggle="tooltip" data-placement="right" title="Добавить Нового Клиента"></i>
+			<i class="my-3 fas fa-plus fa-2x text-white-50" id="add_new_event" data-toggle="modal" data-target="#create_modal" data-toggle="tooltip" data-placement="right" title="Добавить Новое Событие"></i>
+			<i class="my-3 fas fa-users fa-2x text-white-50" onclick="self.location = '/gh_crm/clients_page'" data-toggle="tooltip" data-placement="right" title="Все Клиенты"></i>
+			<i class="my-3 far fa-circle fa-2x text-danger"></i>
+			<i class="my-3 far fa-circle fa-2x text-primary"></i>
+			<i class="my-3 far fa-circle fa-2x text-success"></i>
+		</div>
+		{% block content %}
+		{% endblock %}
+		<div class="col-xl-2 col-lg-2 col-md-2 col-2 collapse" id="crm_filter">
+			Фильтр выборки
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

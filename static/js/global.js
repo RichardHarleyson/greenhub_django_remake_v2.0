@@ -2,6 +2,167 @@
  * Created by Валентин on 29.05.2018.
  */
 
+ // ===============================================
+
+$(document).ready(function(){
+	$('.datepicker').datepicker({
+    language: 'ru'
+	});
+})
+
+$(document).ready(function(){
+	$('#bevents').html($('#content_counts').data('clients_count'));
+	$('#bclients').html($('#content_counts').data('events_count'));
+	$('#crm_form_add_new_client').submit(function(){
+		event.preventDefault();
+		var form_data = $(this).serialize();
+		$.ajax({
+			url: $(this).attr('action'),
+			type: 'POST',
+			data: form_data,
+			success: function(res){
+				$('#client_add_status').html('<h3>Клиент Добавлен</h3>');
+				location.reload();
+			}
+		});
+		return false;
+	});
+	$('#crm_form_add_new_event').submit(function(){
+		event.preventDefault();
+		var form_data = $(this).serialize();
+		$.ajax({
+			url: $(this).attr('action'),
+			type: 'POST',
+			data: form_data,
+			success: function(res){
+				$('#event_add_status').html('<h3>Событие Добавлено</h3>');
+				location.reload();
+			}
+		});
+		return false;
+	});
+	$('.event_on').on('click', function(){
+		$(this).removeClass('event_on');
+		$(this).addClass('event_off');
+		$(this).removeClass('text-danger');
+		$(this).addClass('text-success');
+		$(this).html('Выполнено');
+		$.ajax({
+			url: '/gh_crm/update_event_status',
+			type: 'POST',
+			data: {event_id: $(this).data('event_id'), event_status: 'Выполнено'},
+			success: function(rest){
+			}
+		});
+		return false;
+	});
+	$('.event_off').on('click', function(){
+		$(this).removeClass('event_off');
+		$(this).addClass('event_on');
+		$(this).removeClass('text-success');
+		$(this).addClass('text-danger');
+		$(this).html('Не Выполнено');
+		$.ajax({
+			url: '/gh_crm/update_event_status',
+			type: 'POST',
+			data: {event_id: $(this).data('event_id'), event_status: 'Не Выполнено'},
+			success: function(rest){
+			}
+		});
+		return false;
+	});
+	$('.client_on').click(function(){
+		$(this).removeClass('client_on');
+		$(this).addClass('client_off');
+		$(this).removeClass('text-success');
+		$(this).addClass('text-secondary');
+		$.ajax({
+			url: '/gh_crm/update_client_status',
+			type: 'POST',
+			data: {client_id: $(this).data('client_id'), client_status: '0'},
+			success: function(rest){
+			}
+		});
+		return false;
+	});
+	$('.client_off').click(function(){
+		$(this).removeClass('client_off');
+		$(this).addClass('client_on');
+		$(this).removeClass('text-secondary');
+		$(this).addClass('text-success');
+		$.ajax({
+			url: '/gh_crm/update_client_status',
+			type: 'POST',
+			data: {client_id: $(this).data('client_id'), client_status: '1'},
+			success: function(rest){
+			}
+		});
+		return false;
+	});
+});
+
+function reload_crm(){
+	// $('#crm_core').html('');
+	$.ajax({
+		url: '/gh_crm/event_page',
+		type: 'GET',
+		success: function(res){
+			$('#crm_core').html(res);
+		}
+	});
+}
+
+function upd_event(element){
+	$('#create_modal').modal();
+	$('#crm_form_add_new_event').attr('action','/gh_crm/update_event');
+	$('form select[name=client_id] option[value="'+$(element).data('event_client')+'"]').attr('selected', 'selected');
+	$('form select[name=event_curator] option[value="'+$(element).data('event_curator')+'"]').attr('selected', 'selected');
+	$('form select[name=event_type] option[value="'+$(element).data('event_type')+'"]').attr('selected', 'selected');
+	$('form input[name=event_date]').val($(element).data('event_date'));
+	$('form textarea[name=comment]').val($(element).data('event_comment'));
+	$('form input[name=event_id]').val($(element).data('event_id'));
+}
+
+function upd_client(element){
+	$('#add_new_client_modal').modal();
+	$('#crm_form_add_new_client').attr('action','/gh_crm/update_client');
+	$('form input[name=client_name]').val($(element).data('client_name'));
+	$('form input[name=client_id]').val($(element).data('client_id'));
+	$('form select[name=client_type] option[value="'+$(element).data('client_type')+'"]').attr('selected', 'selected');
+	$('form input[name=client_phone]').val($(element).data('client_phone'));
+	$('form input[name=client_email]').val($(element).data('client_email'));
+	$('form textarea[name=comment]').val($(element).data('client_comment'));
+}
+
+function remove_client(element){
+	if(confirm('Удалить?')){
+		$.ajax({
+			url: '/gh_crm/remove_client',
+			type: 'POST',
+			data: {client_id : $(element).data('client_id')},
+			success: function(res){
+				$('tr[data-client_id='+$(element).data('client_id')+']').addClass('bg-danger');
+			}
+		})
+	}
+}
+
+function remove_event(element){
+	if(confirm('Удалить?')){
+		$.ajax({
+			url: '/gh_crm/remove_event',
+			type: 'POST',
+			data: {event_id : $(element).data('event_id')},
+			success: function(res){
+				$('tr[data-event_id='+$(element).data('event_id')+']').addClass('bg-danger');
+			}
+		})
+	}
+}
+
+
+ // ===============================================
+
 //timeline
 
 //$(".timeline-panel").hide(0);

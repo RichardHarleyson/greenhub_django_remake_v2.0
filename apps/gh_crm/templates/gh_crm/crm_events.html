@@ -1,0 +1,65 @@
+{% extends 'base_crm.html' %}
+
+{% block content %}
+<div class="col-xl col-lg col-md col">
+	<div id="content_count" data-clients_count="{{content.client_count}}" data-events_count="{{content.event_count}}"></div>
+	<div class="row my-2">
+		<div class="col-10">
+			<h4 class="text-dark">События</h4>
+		</div>
+		<div class="col text-center">
+			<button class="btn btn-success w-100"  data-toggle="modal" data-target="#create_modal" name="button">Создать</button>
+		</div>
+		<div class="col text-center">
+			<button class="btn btn-primary w-100" data-toggle="collapse" href="#crm_filter" aria-expanded="false" aria-controls="crm_filter" name="button">Фильтр</button>
+		</div>
+		<hr>
+		<table class="table my-3 text-center table-hover">
+			<thead>
+				<tr>
+					<th scope="col">ST</th>
+					<th scope="col"></th>
+					<th scope="col">Дата</th>
+					<th scope="col">Клиент</th>
+					<th scope="col">Событие</th>
+					<th scope="col">Ответственный</th>
+					<th scope="col">Создал</th>
+					<th scope="col">Статус</th>
+					<th scope="col">Комментарий</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for event in events %}
+				<tr data-event_id="{{event.id}}">
+					<td>
+						{% if event.client_id.client_status %}
+							<i class="client_on fas fa-user fa-2x text-success clicker" data-client_id="{{event.client_id.id}}"></i>
+						{% else %}
+							<i class="client_off fas fa-user fa-2x text-secondary clicker" data-client_id="{{event.client_id.id}}"></i>
+						{% endif %}
+					</td>
+					<td>
+						<a onclick="upd_event(this)" data-event_id="{{event.id}}" data-event_client="{{event.client_id.id}}" data-event_type="{{event.event_type}}" data-event_curator="{{event.event_curator}}" data-event_status="{{event.event_status}}" data-event_comment="{{event.event_comment}}" data-event_date="{{event.event_date}}"><i class="fas fa-pen fa-1x update_event""></i></a>
+						<a class="ml-3" onclick="remove_event(this)" data-event_id="{{event.id}}"><i class="fas fa-trash fa-1x text-primary"></i></a>
+					</td>
+					<td>{{event.event_date}}</td>
+					<td>{{event.client_id.client_name}}</td>
+					<td>{{event.event_type}}</td>
+					<td>{{event.event_curator}}</td>
+					<td>{{event.event_creator}}</td>
+					<td>
+						{% if event.event_status == 'Не Выполнено' %}
+							<span class="event_on text-danger clicker" data-event_id="{{event.id}}">{{event.event_status}}</span>
+						{% else %}
+							<span class="event_off text-success clicker" data-event_id="{{event.id}}">{{event.event_status}}</span>
+						{% endif %}
+					</td>
+					<td><div class="too_big" style="width: 600px;">{{event.event_comment}}</div></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{% endblock %}

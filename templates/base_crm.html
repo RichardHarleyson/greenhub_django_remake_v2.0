@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		{% load staticfiles %}
+    <meta charset="utf-8">
+		{% block head %}
+		<title>
+			{% block title %}
+				Greenhub - Клиенты
+			{% endblock %}
+		</title>
+		{% endblock %}
+    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}" type="image/x-icon">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!--G-Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com/css?family=Ubuntu">
+
+    <!--Custom CSS & JS-->
+    <link rel="stylesheet" href="{% static "css/style.css"%}" type="text/css"/>
+    <link rel="stylesheet" href="{% static "css/preloader.css"%}" type="text/css"/>
+		<link rel="stylesheet" href="{% static "css/datepicker/css/bootstrap-datepicker.standalone.min.css"%}" type="text/css"/>
+
+</head>
+<body>
+<!-- Прелоадер -->
+  <div class="loaderArea" id="loaderArea">
+    <div class="loading-window" id="loading-window">
+      <div class="car">
+          <div class="strike"></div>
+          <div class="strike strike2"></div>
+          <div class="strike strike3"></div>
+          <div class="strike strike4"></div>
+          <div class="strike strike5"></div>
+          <div class="car-detail spoiler"></div>
+          <div class="car-detail back"></div>
+          <div class="car-detail center"></div>
+          <div class="car-detail center1"></div>
+          <div class="car-detail front"></div>
+          <div class="car-detail wheel"></div>
+          <div class="car-detail wheel wheel2"></div>
+      </div>
+          <div class="text">
+              <span>Loading</span><span class = "dots">...</span>
+          </div>
+    </div>
+	</div>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	  <a class="navbar-brand" href="#">GreenHub Client Managment</a>
+	</nav>
+
+	<div class="modal fade" id="create_modal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Новое событие</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form class="m-3" id="crm_form_add_new_event" action="/gh_crm/add_event">
+						{% csrf_token %}
+						<input type="hidden" name="event_id" data-event_id="">
+						<div class="form-group">
+							<label><b>Клиент</b></label>
+							<select class="form-control" name="client_id">
+								{% for client in clients %}
+								<option value="{{client.id}}">{{client.client_name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="form-group">
+							<label><b>Ответственный</b></label>
+							<select class="form-control" name="responsible">
+								<option value="Анатолий">Анатолий</option>
+								<option value="Александр">Александр</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label><b>Дата события</b></label>
+							<div class="input-group date datepicker" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+						    <input type="text" class="form-control" name="event_date">
+						    <div class="input-group-addon">
+						        <span class="glyphicon glyphicon-th"></span>
+						    </div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label><b>Событие</b></label>
+							<select class="form-control" name="event_type">
+								<option value="Звонок">Звонок</option>
+								<option value="Встреча">Встреча</option>
+								<option value="Предложение">Предложение</option>
+								<option value="Договоренность">Договоренность</option>
+								<option value="Подписание контракта">Подписание контракта</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label><b>Комментарий</b></label>
+							<textarea class="form-control" rows="3" name="comment"></textarea>
+						</div>
+						<div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+			        <button type="submit" class="btn btn-success">Сохранить</button>
+			      </div>
+						<div class="text-center" id="event_add_status">
+
+						</div>
+	        </form>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="add_new_client_modal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Новый Клиент</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+					<form id="crm_form_add_new_client" action="/gh_crm/add_client">
+						{% csrf_token %}
+						<div class="form-group">
+							<label><b>Имя</b></label>
+							<input class="form-control" name="client_name">
+						</div>
+						<input type="hidden" name="client_id" data-client_id="">
+						<div class="form-group">
+							<label><b>Чего клиент хочет</b></label>
+							<select class="form-control" name="client_type">
+								<option value="Электромобиль: Автосалон">Электромобиль: Автосалон</option>
+								<option value="Электромобиль: Аукцион">Электромобиль: Аукцион</option>
+								<option value="Аукцион">Аукцион</option>
+								<option value="Ремонт Авто">Ремонт Авто</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label><b>Телефон</b></label>
+							<input class="form-control" name="client_phone">
+						</div>
+						<div class="form-group">
+							<label><b>Email</b></label>
+							<input class="form-control" name="client_email">
+						</div>
+						<div class="form-group">
+							<label><b>Комментарий</b></label>
+							<textarea class="form-control"rows="3" name="comment"></textarea>
+						</div>
+						<div class="custom-control custom-checkbox text-center">
+						  <input type="checkbox" checked class="custom-control-input" id="customCheck1" name="isactive">
+						  <label class="custom-control-label" for="customCheck1">Активный Клиент</label>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+							<button type="submit" class="btn btn-success">Сохранить</button>
+						</div>
+						<div class="text-center" id="client_add_status">
+
+						</div>
+					</form>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
+	<div class="container-fluid h-100" id="crm_core">
+		<div class="row h-100">
+			<div class="col-xl-1 col-lg-1 col-md-1 col bg-dark text-center" style="max-width: 100px;">
+				<i class="my-3 fas fa-users fa-2x text-white-50 side_icons" onclick="self.location = '/gh_crm/clients_page'" data-toggle="tooltip" data-placement="right" title="Все Клиенты"></i><span class="ml-1 badge badge-success" id="bevents" style="font-size:12px;">{{content.client_count}}</span>
+				<i class="my-3 fas fa-list-ul fa-2x text-white-50 side_icons" onclick="self.location = '/gh_crm'" data-toggle="tooltip" data-placement="right" title="Все События"></i><span class="ml-1 badge badge-primary" id="bclients" style="font-size:12px;">{{content.event_count}}</span>
+				<i class="my-3 fas fa-user-plus fa-2x text-white-50 side_icons" id="add_new_client" data-toggle="modal" data-target="#add_new_client_modal" data-toggle="tooltip" data-placement="right" title="Добавить Нового Клиента"></i>
+				<i class="my-3 fas fa-plus fa-2x text-white-50 side_icons" id="add_new_event" data-toggle="modal" data-target="#create_modal" data-toggle="tooltip" data-placement="right" title="Добавить Новое Событие"></i>
+
+			</div>
+			{% block content %}
+				<h1>Content should be here</h1>
+			{% endblock %}
+			<div class="col-xl-2 col-lg-2 col-md-2 col-2 collapse" id="crm_filter">
+				Фильтр выборки
+			</div>
+		</div>
+	</div>
+
+
+
+	<!--Bootstrap & JQuery-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="{% static "js/jquery-3.3.1.min.js"%}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="{% static "css/fonts.css"%}" type="text/css"/>
+	<script src="{% static "js/global.js"%}"></script>
+	<script src="{% static "js/preloader.js"%}"></script>
+	<script src="{% static "js/datepicker/js/bootstrap-datepicker.min.js"%}"></script>
+	<script src="{% static "js/datepicker/locales/bootstrap-datepicker.ru.min.js"%}"></script>
+
+	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% extends 'base_crm.html' %}
+
+{% block content %}
+		<div class="col-xl col-lg col-md col">
+			<div id="content_counts" data-clients_count="{{content.client_count}}" data-events_count="{{content.event_count}}"></div>
+			<div class="row my-2">
+				<div class="col-10">
+					<h4 class="text-dark">Клиенты</h4>
+				</div>
+				<div class="col text-center">
+					<button class="btn btn-success w-100"  data-toggle="modal" data-target="#create_modal" name="button">Добавить</button>
+				</div>
+				<div class="col text-center">
+					<button class="btn btn-primary w-100" data-toggle="collapse" href="#crm_filter" aria-expanded="false" aria-controls="crm_filter" name="button">Фильтр</button>
+				</div>
+				<hr>
+				<table class="table my-3 text-center table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">ST</th>
+							<th scope="col"></th>
+				      <th scope="col">Добавлен</th>
+				      <th scope="col">Клиент</th>
+							<th scope="col">Группа</th>
+							<th scope="col">Телефон</th>
+							<th scope="col">Email</th>
+							<th scope="col">Комментарий</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+						{% for client in clients %}
+						<tr data-client_id="{{client.id}}">
+							<td>
+								{% if client.client_status %}
+									<i class="client_on fas fa-user fa-2x text-success clicker" data-client_id="{{client.id}}"></i>
+								{% else %}
+									<i class="client_off fas fa-user fa-2x text-secondary clicker" data-client_id="{{client.id}}"></i>
+								{% endif %}
+							</td>
+							<td>
+								<a onclick="upd_client(this)" data-client_id="{{client.id}}" data-client_name="{{client.client_name}}" data-client_type="{{client.client_type}}" data-client_phone="{{client.client_phone}}" data-client_status="{{client.client_status}}" data-client_comment="{{client.client_comment}}" data-client_email="{{client.client_email}}"><i class="fas fa-pen fa-1x update_client"></i></a>
+								<a class="ml-3" onclick="remove_client(this)" data-client_id="{{client.id}}"><i class="fas fa-trash fa-1x text-primary"></i></a>
+							</td>
+							<td>{{client.client_join_date}}</td>
+							<td>{{client.client_name}}</td>
+							<td>{{client.client_type}}</td>
+							<td>{{client.client_phone}}</td>
+							<td>{{client.client_email}}</td>
+							<td><div class="too_big" style="width: 400px;">{{client.client_comment}}</div></td>
+						</tr>
+						{% endfor %}
+				  </tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xl-2 col-lg-2 col-md-2 col-2 collapse" id="crm_filter">
+			Фильтр выборки
+		</div>
+	</div>
+</div>
+
+{% endblock %}

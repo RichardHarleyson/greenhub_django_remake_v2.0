@@ -26,16 +26,23 @@ def testdrive_form(request):
 		return HttpResponse(False)
 
 	server = smtplib_login();
-	recipients = ['greenhub.ua@gmail.com','bobenser@gmail.com','richard.harleyson@gmail.com',]
+	recipients = ['greenhub.ua@gmail.com',]
 	inner_msg = 'Имя: %s. \r\nТел: %s'%(request.POST.get('name'), request.POST.get('phone'))
 	msg = MIMEText(inner_msg, 'plain', 'utf-8')
 	msg['Subject'] = Header('Тест Драйв', 'utf-8')
 	msg['From'] = 'greenhub@greenhub.pro'
-	server.sendmail(
-	  	msg['From'],
-	  	recipients,
-		msg.as_string())
-	server.quit()
+	try:
+		server.sendmail(
+	  		msg['From'],
+		  	recipients,
+			msg.as_string())
+	except:
+		print("We've got a situation here")
+		with open('/home/greenhub/django/logs/smtp.log', 'at', encoding='utf-8') as File:
+			File.write('Error \n');
+			File.close();
+	finally:
+		server.quit()
 	return HttpResponse(True)
 
 def callme_form(request):
@@ -51,7 +58,7 @@ def callme_form(request):
 		return HttpResponse(False)
 
 	server = smtplib_login();
-	recipients = ['greenhub.ua@gmail.com','richard.harleyson@gmail.com','bobenser@gmail.com']
+	recipients = ['greenhub.ua@gmail.com',]
 	inner_msg = 'Имя: %s. \r\nТел: %s'%(request.POST.get('name'), request.POST.get('phone'))
 	msg = MIMEText(inner_msg, 'plain', 'utf-8')
 	msg['Subject'] = Header('Перезвонить', 'utf-8')

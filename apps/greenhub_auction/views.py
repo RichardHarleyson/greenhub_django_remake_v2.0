@@ -17,7 +17,7 @@ def smtplib_login():
 
 def client(request):
 	server = smtplib_login();
-	recipients = ['greenhub.ua@gmail.com','bobenser@gmail.com','richard.harleyson@gmail.com']
+	recipients = ['bobenser@gmail.com']
 	inner_msg = 'Тел: %s,\r\nТип кузова: %s,\r\n Тип топлива: %s,\r\n %s - %s ,\r\n Бюджет: %s,\r\n Комментарий: %s'%(
 			  	request.POST.get('phone'),
 			  	request.POST.get('veh_type'),
