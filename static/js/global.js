@@ -129,6 +129,8 @@ function upd_client(element){
 	$('form input[name=client_name]').val($(element).data('client_name'));
 	$('form input[name=client_id]').val($(element).data('client_id'));
 	$('form select[name=client_type] option[value="'+$(element).data('client_type')+'"]').attr('selected', 'selected');
+	$('form input[name=veh_body]').val($(element).data('veh_body'));
+	$('form input[name=veh_budget]').val($(element).data('veh_budget'));
 	$('form input[name=client_phone]').val($(element).data('client_phone'));
 	$('form input[name=client_email]').val($(element).data('client_email'));
 	$('form textarea[name=comment]').val($(element).data('client_comment'));

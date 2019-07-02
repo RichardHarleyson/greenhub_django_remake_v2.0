@@ -27,6 +27,8 @@ def add_client(request):
 		new_client = Crm_Clients.objects.create(
 			client_name = request.POST.get('client_name'),
 			client_type = request.POST.get('client_type'),
+			veh_body = request.POST.get('veh_body'),
+			veh_budget = request.POST.get('veh_budget'),
 			client_phone = request.POST.get('client_phone'),
 			client_email = request.POST.get('client_email'),
 			client_comment = request.POST.get('comment'),
@@ -77,6 +79,8 @@ def update_client(request):
 			isactive = False
 		get_client = Crm_Clients.objects.all().filter(id = int(request.POST.get('client_id'))).update(
 			client_name = request.POST.get('client_name'),
+			veh_body = request.POST.get('veh_body'),
+			veh_budget = request.POST.get('veh_budget'),
 			client_type = request.POST.get('client_type'),
 			client_phone = request.POST.get('client_phone'),
 			client_email = request.POST.get('client_email'),
