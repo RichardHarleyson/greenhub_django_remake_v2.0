@@ -25,6 +25,21 @@ class Vehicle(models.Model):
 	def full_name(self):
 		return self.veh_title
 
+class Vehicle_new(models.Model):
+	veh_model = models.CharField(max_length=100, default='empty')
+	veh_photo = models.FileField(upload_to='vehicles_new/%Y/%m_%d/', blank=True)
+	veh_year = models.CharField(max_length=10, default='0')
+	veh_mileage = models.CharField(max_length=10, default='0')
+	veh_color_in = models.CharField(max_length=20, default='empty')
+	vah_color = models.CharField(max_length=20, default='empty')
+	veh_price = models.CharField(max_length=10, default='0')
+	veh_type = models.CharField(max_length=20, default='empty')
+	veh_status = models.CharField(max_length=20, default='empty')
+	record_status = models.BooleanField(default=True)
+	veh_incomming_date = models.CharField(max_length=20, default='empty')
+	add_date = models.DateTimeField(auto_now_add=True)
+
+
 # Дополнительные фото машины, могут находится как на сервере так и на внешних ресурсах
 class Vehicle_photos(models.Model):
 	# Адрес фото хранимого локально на сервере

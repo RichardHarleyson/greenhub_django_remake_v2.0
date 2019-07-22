@@ -8,44 +8,90 @@
 {% endblock %}
 
 {% block content %}
-	<div class="container">
-		<h1 style="margin: 5%;">У нас в салоне<br class='d-sm-block d-md-none'><small> Заходи, пощупай</small></h1>
+<div class="text-center mt-4 mb-3">
+	<h2>Выбери Автомобиль По Душе</h2>
+</div>
+	<div class="container my-4">
+		<div class="text-center">
+			<div class="">
+				<button class="btn btn-lg btn-success" data-toggle="collapse" href="#veh_list" role="button" aria-expanded="true">
+			    Краткий Список Авто
+				</button>
+				<div class="collapse" id="veh_list">
+			    <table class="table my-3">
+						<tr>
+					    <th scope="col">#</th>
+					    <th scope="col">Год</th>
+					    <th scope="col">Пробег</th>
+					    <th scope="col">Цена</th>
+							<th scope="col">Цвет</th>
+							<th scope="col">Салон</th>
+							<th scope="col">Где</th>
+							<th scope="col">Прибытие</th>
+					  </tr>
+						<tbody>
+							{% for vehicle in vehicles %}
+							<tr>
+								<th>{{vehicle.veh_model}}</th>
+								<th>{{vehicle.veh_year}}</th>
+								<th>{{vehicle.veh_mileage}}</th>
+								<th>{{vehicle.veh_price}}</th>
+								<th>{{vehicle.vah_color}}</th>
+								<th>{{vehicle.veh_color_in}}</th>
+								<th>{{vehicle.veh_type}}</th>
+								{% if vehicle.veh_incomming_date != '' %}
+									<th>{{vehicle.veh_incomming_date}}</th>
+								{% else %}
+									<th>На Месте</th>
+								{% endif %}
+
+							</tr>
+							{% endfor %}
+						</tbody>
+			    </table>
+				</div>
+			</div>
+		</div>
 	</div>
-	{% for car in cars %}
+
+	<hr class="w-50">
+
+	{% for vehicle in vehicles %}
 
 	<div class="container">
 		<div class="row special-font">
 			<div class="col-md-7">
 				<div class="image veh_image">
 						<!-- Image corousel -->
-						<img class="img-fluid" src="{{ car.veh_photo.url }}" alt="Vehicle image here" class="img-thumbnail">
+						<img class="img-fluid" src="{{ vehicle.veh_photo }}" alt="Vehicle image here" class="img-thumbnail">
 				</div>
 			</div>
 			<div class="col-md-5">
-				<h3>{{car.full_name}}</h3>
+				<h3>{{vehicle.veh_model}}</h3>
 				<div class="row">
 					<div class="col">
-						<p class='g-font-size-18--xs'><span></span>VIN: </p>
+						<p class='g-font-size-18--xs'><span></span>{{vehicle.veh_type}}</p>
+						<p class='g-font-size-18--xs'><span></span>Год:</p>
 						<p class='g-font-size-18--xs'><span></span>Пробег: </p>
-						<p class='g-font-size-18--xs'><span></span>Комплектация: </p>
 						<p class='g-font-size-18--xs'><span></span>Кузов: </p>
 						<p class='g-font-size-18--xs'><span></span>Салон: </p>
-						<p class='g-font-size-18--xs'><span></span>Батарея: </p>
-						<h4>{{car.veh_price}}$</h4>
+						{% if vehicle.veh_incomming_date != '' %}<p class='g-font-size-18--xs'><span></span>Прибывает: </p>{% endif %}
+						<div class="text-center my-2">
+							<h3>{{vehicle.veh_price}}$</h3>
+						</div>
 					</div>
 					<div class="col">
-						<p class='g-font-size-18--xs'>{{car.veh_vin}}</p>
-						<p class='g-font-size-18--xs'>{{car.veh_mileage}}км</p>
-
-						<p class='g-font-size-18--xs'>{% if car.veh_comp == ''%} _ {% else %} {{car.veh_comp}} {% endif %}</p>
-						<p class='g-font-size-18--xs'>{% if car.veh_color == ''%} _ {% else %} {{car.veh_color}} {% endif %}</p>
-						<p class='g-font-size-18--xs'>{% if car.veh_color_in == ''%} _ {% else %} {{car.veh_color_in}} {% endif %}</p>
-						<p class='g-font-size-18--xs'>{% if car.veh_battery == ''%} _ {% else %} {{car.veh_battery}} {% endif %}</p>
+						<p>&nbsp;</p>
+						<p class='g-font-size-18--xs'><span></span>{{vehicle.veh_year}}</p>
+						<p class='g-font-size-18--xs'>{{vehicle.veh_mileage}}</p>
+						<p class='g-font-size-18--xs'>{% if vehicle.vah_color == ''%} _ {% else %} {{vehicle.vah_color}} {% endif %}</p>
+						<p class='g-font-size-18--xs'>{% if vehicle.veh_color_in == ''%} _ {% else %} {{vehicle.veh_color_in}} {% endif %}</p>
+						{% if vehicle.veh_incomming_date != '' %}<p class='g-font-size-18--xs'><span></span>{{vehicle.veh_incomming_date}}</p>{% endif %}
 					</div>
 				</div>
-				<a class="w-50">
+				<!-- <a class="w-50">
 						<button class="btn btn-lg btn-outline-success btn-success text-center w-50 margin-bot-10" data-toggle="modal" data-target="#callmemodal">Узнать больше</button>
-				</a>
+				</a> -->
 			</div>
 			<hr class="w-50">
 		</div>

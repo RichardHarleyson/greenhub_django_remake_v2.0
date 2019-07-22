@@ -12,7 +12,17 @@
 
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">GreenHub Client Managment</a>
+	<a class="navbar-brand" href="#">GreenHub Managment</a>
+	<div class="collapse navbar-collapse" id="sysnavbar">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="/gh_crm/clients_page">CRM Система<span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="/electrocars/add_veh">Добавление Авто<span class="sr-only">(current)</span></a>
+			</li>
+		</ul>
+	</div>
 </nav>
 
 <div class="modal fade" id="create_modal" tabindex="-1" role="dialog" aria-hidden="true">

@@ -8,7 +8,7 @@
       // }, 1000);
 	// //var p = document.getElementsByClassName("loading-window");
   // }
-  
+
   document.addEventListener("DOMContentLoaded", function(event) {
   // document.body.onload = function(){
 	  setTimeout(function(){

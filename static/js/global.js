@@ -162,6 +162,24 @@ function remove_event(element){
 	}
 }
 
+// Добавить Авто
+
+$(document).ready(function(){
+	$('#add_veh_send').submit(function(){
+		event.preventDefault();
+		var data = new FormData($('form')[0]);
+		$.ajax({
+			url: '/electrocars/add_veh_send',
+			type: 'POST',
+			data: data,
+			processData: false,
+			contentType: false,
+			success: function(res){
+				$('#add_veh_status').html('<h3>Успешно Добавлено</h3>')
+			}
+		});
+	});
+});
 
  // ===============================================
 
