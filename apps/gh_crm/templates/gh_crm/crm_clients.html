@@ -21,6 +21,7 @@
 							<th scope="col"></th>
 				      <th scope="col">#</th>
 				      <th scope="col">Клиент</th>
+							<th scope="col">Фото</th>
 							<th scope="col">Группа</th>
 							<th scope="col">ТЗ</th>
 							<th scope="col">Бюджет</th>
@@ -44,6 +45,17 @@
 							</td>
 							<td>{{client.id}}</td>
 							<td>{{client.client_name}}</td>
+							<td>
+								<a onclick="call_imgmodal(this)" class="btn btn-primary mr-1 text-white" data-target="#modalIMG" data-toggle="modal" data-client_photo="{{client.veh_photo}}">
+									<i class="fas fa-search"></i>
+								</a>
+								<label class="m-0 ml-1 text-white" for="file_{{client.id}}">
+									<a class="btn btn-primary">
+										<i class="far fa-file-image"></i>
+									</a>
+								</label>
+								<input id="file_{{client.id}}" data-client_id="{{client.id}}" name="veh_photo" type="file" style="width: 0.1px; height: 0.1px; opacity: 0; z-index: -1; position: absolute; overflow: hidden">
+							</td>
 							<td>{{client.client_type}}</td>
 							<td><div class="too_big" style="width: 200px;">{{client.veh_body}}</div></td>
 							<td>{{client.veh_budget}}</td>
@@ -57,6 +69,21 @@
 		</div>
 		<div class="col-xl-2 col-lg-2 col-md-2 col-2 collapse" id="crm_filter">
 			Фильтр выборки
+		</div>
+	</div>
+</div>
+
+<div aria-hidden="true" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-body mb-0 p-0">
+				<img id="veh_photo_to_set" src="https://i3.ytimg.com/vi/vr0qNXmkUJ8/maxresdefault.jpg" alt="" style="width:100%">
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" >Prev</button>
+				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" >Next</button>
+				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+			</div>
 		</div>
 	</div>
 </div>

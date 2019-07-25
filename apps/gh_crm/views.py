@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Crm_Clients, Crm_Events
+from .models import Crm_Clients, Crm_Events, Client_file
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 import datetime
@@ -9,13 +9,14 @@ def events_page(request):
 	clients = Crm_Clients.objects.all().filter(isvisible = True)
 	events = Crm_Events.objects.all().filter(isvisible = True)
 	counts = {'client_count': clients.count(), 'event_count': events.count()}
-	return render(request, 'gh_crm/crm_events.html', context={'clients': clients, 'events': events, 'content': counts})
+	return render(request, 'gh_crm/crm_events.html', context={'clients': clients, 'events': events, 'content': counts,})
 
 def clients_page(request):
 	clients = Crm_Clients.objects.all().filter(isvisible = True)
 	events = Crm_Events.objects.all().filter(isvisible = True)
+	files = Client_file.objects.all().filter(photo_status = True)
 	counts = {'client_count': clients.count(), 'event_count': events.count()}
-	return render(request, 'gh_crm/crm_clients.html', context={'clients': clients, 'content': counts})
+	return render(request, 'gh_crm/crm_clients.html', context={'clients': clients, 'content': counts, 'files': files})
 
 def add_client(request):
 	now = datetime.datetime.now()

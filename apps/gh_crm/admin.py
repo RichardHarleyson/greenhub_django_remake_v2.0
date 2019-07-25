@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Crm_Clients, Crm_Events
+from .models import Crm_Clients, Crm_Events, Client_file
 
 class MainAdmin(admin.ModelAdmin):
 	list_display = (
@@ -26,5 +26,14 @@ class MainAdmin2(admin.ModelAdmin):
 		'isvisible',
 	)
 
+class MainAdmin3(admin.ModelAdmin):
+	list_display = (
+		'id',
+		'client_id',
+		'client_file',
+		'photo_status',
+	)
+
 admin.site.register(Crm_Clients, MainAdmin)
 admin.site.register(Crm_Events, MainAdmin2)
+admin.site.register(Client_file, MainAdmin3)

@@ -29,3 +29,8 @@ class Crm_Events(models.Model):
 	event_comment = models.CharField(max_length=500, default='empty',)
 	event_state = models.BooleanField(default=True)
 	isvisible = models.BooleanField(default=True)
+
+class Client_file(models.Model):
+	client_file = models.FileField(upload_to='clients/%Y/%m_%d/', blank=False)
+	client_id = models.ForeignKey(Crm_Clients, on_delete=models.CASCADE, related_name='photos')
+	photo_status = models.BooleanField(default=True)

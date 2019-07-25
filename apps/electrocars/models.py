@@ -49,3 +49,4 @@ class Vehicle_photos(models.Model):
 	veh_id = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name='photos')
 	# Тип хранения фото(на сервере, гугл диск или внешний ресурс)
 	type = models.PositiveSmallIntegerField(default=0, blank=False)
+	photo_status = models.BooleanField(default=True)
