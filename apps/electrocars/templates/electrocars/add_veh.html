@@ -54,80 +54,164 @@
 					<a class="nav-link" href="/gh_crm/clients_page">CRM Система<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="/electrocars/add_veh">Добавление Авто<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="/electrocars/add_veh">Управление Авто<span class="sr-only">(current)</span></a>
 				</li>
 			</ul>
 		</div>
 	</nav>
 
-	<div class="row my-4">
-		<div class="col-3">
+	<div class="container-fluid my-4">
+		<p>
+		  <a class="btn btn-primary" data-toggle="collapse" href="#add_veh_collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+		    Добавить Авто
+		  </a>
+		  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#ctrl_veh_collapse" aria-expanded="false" aria-controls="collapseExample">
+		    Управление Авто
+		  </button>
+		</p>
+		<div class="collapse" id="add_veh_collapse">
+			<div class="row my-4">
+				<div class="col-3">
+				</div>
+				<div class="col-4">
+					<h3>Добавить Авто</h3>
+					<form id="add_veh_send" class="m-4" action="/electrocars/add_veh_send" enctype = “multipart/form-data”>
+						{% csrf_token %}
+						<div class="form-group">
+					    <label >Марка Авто</label>
+					    <input type="text" class="form-control" name="veh_model">
+					    <small class="form-text text-muted">Марка, Модель и Комплектация Автомобиля</small>
+					  </div>
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text">Фото</span>
+						  </div>
+						  <div class="custom-file">
+						    <input type="file" class="custom-file-input" name="veh_photo">
+						    <label class="custom-file-label" for="inputGroupFile01">Загрузить</label>
+						  </div>
+						</div>
+						<hr>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control mr-3" name="veh_year" placeholder="Год Выпуска">
+							<input type="text" class="form-control ml-3" name="veh_mileage" placeholder="Пробег">
+						</div>
+						<hr>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control mr-3" name="veh_color" placeholder="Кузов">
+							<input type="text" class="form-control ml-3" name="veh_color_in" placeholder="Салон">
+						</div>
+						<hr>
+						<div class="input-group mb-3">
+							<select class="custom-select mr-3" name="veh_type">
+								<option value="В Салоне" selected>На Салоне</option>
+								<option value="В Пути">В Пути</option>
+							</select>
+							<select class="custom-select ml-3" name="veh_status">
+								<option value ="Готов" selected>Готов</option>
+								<option value="Не Готов">Не Готов</option>
+							</select>
+						</div>
+						<hr>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" name="veh_price" placeholder="Цена">
+						</div>
+						<hr>
+						<div class="input-group date datepicker" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+							<label class="mr-4">Дата Прибытия</label>
+							<input type="text" class="form-control" name="veh_incomming_date">
+							<div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
+							</div>
+						</div>
+						<hr>
+						<div class="text-center my-3">
+							<button class="btn btn-success w-50" type="submit">Добавить Авто</button>
+						</div>
+						<div id="add_veh_status" class="text-center">
 
+						</div>
+					</form>
+				</div>
+				<div class="col-5">
+				</div>
+			</div>
 		</div>
-		<div class="col-4">
-			<h3>Добавить Авто</h3>
-			<form id="add_veh_send" class="m-4" action="/electrocars/add_veh_send" enctype = “multipart/form-data”>
-				{% csrf_token %}
-				<div class="form-group">
-			    <label >Марка Авто</label>
-			    <input type="text" class="form-control" name="veh_model">
-			    <small class="form-text text-muted">Марка, Модель и Комплектация Автомобиля</small>
-			  </div>
-				<div class="input-group mb-3">
-				  <div class="input-group-prepend">
-				    <span class="input-group-text" >Заглавное фото</span>
-				  </div>
-				  <div class="custom-file">
-				    <input type="file" class="custom-file-input" name="veh_photo">
-				    <label class="custom-file-label" for="inputGroupFile01">Загрузить</label>
-				  </div>
-				</div>
-				<hr>
-				<div class="input-group mb-3">
-					<input type="text" class="form-control mr-3" name="veh_year" placeholder="Год Выпуска">
-					<input type="text" class="form-control ml-3" name="veh_mileage" placeholder="Пробег">
-				</div>
-				<hr>
-				<div class="input-group mb-3">
-					<input type="text" class="form-control mr-3" name="veh_color" placeholder="Цвет Кузова">
-					<input type="text" class="form-control ml-3" name="veh_color_in" placeholder="Цвет Салона">
-				</div>
-				<hr>
-				<div class="input-group mb-3">
-					<select class="custom-select mr-3" name="veh_type">
-						<option value="В Салоне" selected>На Салоне</option>
-						<option value="В Пути">В Пути</option>
-					</select>
-					<select class="custom-select ml-3" name="veh_status">
-						<option value ="Готов" selected>Готов</option>
-						<option value="Не Готов">Не Готов</option>
-					</select>
-				</div>
-				<hr>
-				<div class="input-group mb-3">
-					<input type="text" class="form-control" name="veh_price" placeholder="Цена">
-				</div>
-				<hr>
-				<div class="input-group date datepicker" data-provide="datepicker" data-date-format="dd/mm/yyyy">
-					<label class="mr-4">Дата Прибытия</label>
-					<input type="text" class="form-control" name="veh_incomming_date">
-					<div class="input-group-addon">
-							<span class="glyphicon glyphicon-th"></span>
-					</div>
-				</div>
-				<hr>
-				<div class="text-center my-3">
-					<button class="btn btn-success w-50" type="submit">Добавить Авто</button>
-				</div>
-				<div id="add_veh_status" class="text-center">
-
-				</div>
-			</form>
-		</div>
-		<div class="col-5">
-
+		<div class="collapse show" id="ctrl_veh_collapse">
+			<div class="container-fluid my-4">
+				<table class="table w-auto table-sm text-center">
+					<thead>
+						<tr class="d-flex">
+							<th>#</th>
+							<th class='col'>Модель</th>
+							<th class='col'>Фото</th>
+							<th class='col'>Год</th>
+							<th class='col'>Пробег</th>
+							<th class='col'>Цвет</th>
+							<th class='col'>Салон</th>
+							<th class='col'>Цена</th>
+							<th class='col'>Тип</th>
+							<th class='col'>Статус</th>
+							<th class='col'>Дата</th>
+							<th class='col'>Кнопки</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for vehicle in vehicles %}
+						<tr class='d-flex'>
+							<form class="veh_update_form" data-veh_id="{{vehicle.id}}">
+								{% csrf_token %}
+								<td class="my-auto border-0">{{vehicle.id}}</td>
+								<td class='col'><input class="form-control" type="text" name="veh_model" value="{{vehicle.veh_model}}"></td>
+								<!-- <td><input type="text" name="veh_model" value="{{vehicle.veh_photo}}"></td> -->
+								<td class='col'>
+									<a onclick="call_imgmodal(this)" class="btn btn-primary mr-1 text-white" data-target="#modalIMG" data-toggle="modal" data-veh_photo="{{vehicle.veh_photo}}">
+										<i class="fas fa-search"></i>
+									</a>
+									<label class="m-0 ml-1 text-white" for="file_{{vehicle.id}}">
+										<a class="btn btn-primary">
+											<i class="far fa-file-image"></i>
+										</a>
+									</label>
+									<input id="file_{{vehicle.id}}" data-veh_id="{{vehicle.id}}" name="veh_photo" type="file" style="width: 0.1px; height: 0.1px; opacity: 0; z-index: -1; position: absolute; overflow: hidden">
+								</td>
+								<td class='col'><input class="form-control" type="text" name="veh_year" value="{{vehicle.veh_year}}"></td>
+								<td class='col'><input class="form-control" type="text" name="veh_mileage" value="{{vehicle.veh_mileage}}"></td>
+								<td class='col'><input class="form-control" type="text" name="veh_color" value="{{vehicle.vah_color}}"></td>
+								<td class='col'><input class="form-control" type="text" name="veh_color_in" value="{{vehicle.veh_color_in}}"></td>
+								<td class='col'><input class="form-control" type="text" name="veh_price" value="{{vehicle.veh_price}}"></td>
+								<td class='col'><input class="form-control" type="text" name="veh_type" value="{{vehicle.veh_type}}"></td>
+								<td class='col'><input class="form-control" type="text" name="veh_status" value="{{vehicle.veh_status}}"></td>
+								<td class='col'><input class="form-control" type="text" name="veh_incomming_date" value="{{vehicle.veh_incomming_date}}"></td>
+								<td class='col'>
+									<button class='testclass btn btn-primary mr-1' onclick="upd_veh(this)" data-veh_id="{{vehicle.id}}">
+										<i class="text-white fas fa-save"></i>
+									</button>
+									<button class='btn btn-primary ml-1' onclick="del_veh(this)" data-veh_id="{{vehicle.id}}">
+										<i class="text-white fas fa-trash"></i>
+									</button>
+								</td>
+							</form>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-body mb-0 p-0">
+				<img id="veh_photo_to_set" src="https://i3.ytimg.com/vi/vr0qNXmkUJ8/maxresdefault.jpg" alt="" style="width:100%">
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 	<!--Bootstrap & JQuery-->

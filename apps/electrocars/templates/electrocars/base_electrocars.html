@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="text-center mt-4 mb-3">
+<div class="text-center mt-4 mb-3 mx-3">
 	<h2>Выбери Автомобиль По Душе</h2>
 </div>
 	<div class="container my-4">
@@ -18,32 +18,36 @@
 			    Краткий Список Авто
 				</button>
 				<div class="collapse" id="veh_list">
-			    <table class="table my-3">
-						<tr>
-					    <th scope="col">#</th>
-					    <th scope="col">Год</th>
-					    <th scope="col">Пробег</th>
-					    <th scope="col">Цена</th>
-							<th scope="col">Цвет</th>
-							<th scope="col">Салон</th>
-							<th scope="col">Где</th>
-							<th scope="col">Прибытие</th>
-					  </tr>
+			    <table class="table my-3 table-responsive-md text-center">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Модель</th>
+								<th>Год</th>
+								<th>Пробег</th>
+								<th>Цена</th>
+								<th>Цвет</th>
+								<th>Салон</th>
+								<!-- <th class="col col-sm">Где</th>
+								<th class="col col-sm">Прибытие</th> -->
+							</tr>
+						</thead>
 						<tbody>
 							{% for vehicle in vehicles %}
 							<tr>
+								<th>{{vehicle.id}}</th>
 								<th>{{vehicle.veh_model}}</th>
 								<th>{{vehicle.veh_year}}</th>
 								<th>{{vehicle.veh_mileage}}</th>
 								<th>{{vehicle.veh_price}}</th>
 								<th>{{vehicle.vah_color}}</th>
 								<th>{{vehicle.veh_color_in}}</th>
-								<th>{{vehicle.veh_type}}</th>
+								<!-- <th class="col col-sm">{{vehicle.veh_type}}</th>
 								{% if vehicle.veh_incomming_date != '' %}
-									<th>{{vehicle.veh_incomming_date}}</th>
+									<th class="col col-sm">{{vehicle.veh_incomming_date}}</th>
 								{% else %}
-									<th>На Месте</th>
-								{% endif %}
+									<th class="col col-sm">На Месте</th>
+								{% endif %} -->
 
 							</tr>
 							{% endfor %}

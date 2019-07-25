@@ -175,11 +175,91 @@ $(document).ready(function(){
 			processData: false,
 			contentType: false,
 			success: function(res){
-				$('#add_veh_status').html('<h3>Успешно Добавлено</h3>')
+				$('#add_veh_send').trigger('reset');
+				$('#add_veh_status').html('<h3>Успешно Добавлено</h3>');
+				setTimeout(function(){$('#add_veh_status').html('');}, 2000);
 			}
 		});
 	});
 });
+
+function call_imgmodal(elem){
+	var veh_photo = $(elem).data('veh_photo');
+	$('#veh_photo_to_set').prop('src', veh_photo);
+}
+
+// Update авто
+function upd_veh(elem){
+		event.preventDefault();
+		var gparent = $(elem).parent().parent();
+		console.log($('#file_'+$(elem).data('veh_id'))[0].files[0]);
+		var data = new FormData();
+		data.append('veh_id', $(elem).data('veh_id'));
+		data.append('veh_model', gparent.find('input[name="veh_model"]').val());
+		data.append('veh_year', gparent.find('input[name="veh_year"]').val());
+		data.append('veh_mileage', gparent.find('input[name="veh_mileage"]').val());
+		data.append('veh_color', gparent.find('input[name="veh_color"]').val());
+		data.append('veh_color_in', gparent.find('input[name="veh_color_in"]').val());
+		data.append('veh_price', gparent.find('input[name="veh_price"]').val());
+		data.append('veh_type', gparent.find('input[name="veh_type"]').val());
+		data.append('veh_status', gparent.find('input[name="veh_status"]').val());
+		data.append('veh_incomming_date', gparent.find('input[name="veh_incomming_date"]').val());
+		data.append('veh_photo', $('#file_'+$(elem).data('veh_id'))[0].files[0]);
+		$.ajax({
+			url: '/electrocars/upd_veh',
+			type: 'POST',
+			data: data,
+			processData: false,
+			contentType: false,
+			success: function(rest){
+				gparent.css('background', 'green');
+				setTimeout(function(){gparent.css('background', 'white')}, 2000);
+			}
+		})
+	}
+
+function del_veh(elem){
+	if(confirm('Уверены?') == false){
+		return 0;
+	}
+	event.preventDefault();
+	var gparent = $(elem).parent().parent();
+	var data = new FormData();
+	data.append('veh_id', $(elem).data('veh_id'));
+	$.ajax({
+		url: '/electrocars/del_veh',
+		type: 'POST',
+		data: data,
+		processData: false,
+		contentType: false,
+		success: function(rest){
+			gparent.css('background', 'red');
+			setTimeout(function(){ gparent.removeClass('d-flex');gparent.hide()}, 2000);
+		}
+	});
+}
+
+// Тоглеры управления авто
+$(document).ready(function(){
+	$('#add_veh_collapse').on('show.bs.collapse', function(){
+		$('#ctrl_veh_collapse').collapse('hide');
+	});
+	$('#ctrl_veh_collapse').on('show.bs.collapse', function(){
+		$('#add_veh_collapse').collapse('hide');
+	});
+})
+
+$(document).ready(function(){
+	$("#pop").on("click", function(e) {
+   // e.preventDefault();
+   $('#the-modal').modal('toggle');
+	});
+	// $('#the-modal').on("click", function(e) {
+	// 	$("body").find(".modal").removeClass("visible");
+	// });
+})
+
+
 
  // ===============================================
 
